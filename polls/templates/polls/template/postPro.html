@@ -21,7 +21,7 @@
             <div class="sub">
                 <ul>
                     <li>
-                        <a class="scrolle button-small button-primary" {% if user.is_authenticated %} href="polls/passerannonce" {% else %} href="polls/login" {% endif %}>Déposer une annonce</a>
+                        <a class="scrolle button-small button-primary" {% if user.is_authenticated %} href="passerannonce" {% else %} href="login" {% endif %}>Déposer une annonce</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li><a class="st" href="#">Mes favoris</a></li>

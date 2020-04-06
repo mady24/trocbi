@@ -1096,6 +1096,10 @@ margin-top: 3%;
     padding-right: 4%;
 }
 
+#NatRow, #FamRow{
+    display: none;
+}
+
 
 .upload-btn-wrapper {
     position: relative;

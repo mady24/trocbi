@@ -61,18 +61,6 @@ def passer(request):
 
 def passerAjouter(request):
     print(request.POST)
-    nn = 0
-    nf = 0
-    if(request.POST['newNat'] != ''):
-        so = NatureBien(nature=request.POST['newNat'])
-        so.save()
-        sos = NatureBien.objects.get(pk=request.POST['newNat'])
-        nn= sos.id
-    if(request.POST['newFam'] != ''):
-        so = SousFamille(sous_famille=request.POST['newFam'])
-        so.save()
-        sos = SousFamille.objects.order_by(pk=request.POST['newFam'])
-        nf= sos.id
     if(request.POST['type'] == 'demande'):
         name = request.POST['nameA']
         nn = request.POST['nat']
@@ -97,8 +85,8 @@ def passerAjouter(request):
         propIns.save()
     if(request.POST['type'] == 'offre'):
         name = request.POST['nameA']
-        nat = request.POST['nat']
-        fam = request.POST['catA']
+        nn = request.POST['nat']
+        nf = request.POST['catA']
         typeA = 'offre'
         du = request.POST['du']
         eac = request.POST['eac']

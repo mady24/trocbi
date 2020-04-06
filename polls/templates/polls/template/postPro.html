@@ -90,7 +90,7 @@
                             {% for prop in nat %}
                             <option value="{{ prop.id }}">{{ prop.nature}}</option>
                             {% endfor %}
-                            <option value="autre">autre</option>
+                            <option value="other">autre</option>
                         </select>
                     </div>
                 </div>
@@ -107,6 +107,7 @@
                     <div class="colone">
                         <label for="catA">Catégorie</label>
                         <select name="catA" id="catA" onchange="newRanger(this);"  class="select-css1">
+                            <option value=""></option>
                             {% for prop in sousFamille %}
                             <option value="{{ prop.id }}">{{ prop.sous_famille}}</option>
                             {% endfor %}

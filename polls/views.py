@@ -110,8 +110,8 @@ def passerAjouter(request):
 
         propIns = PostProp(
             name=name,
-            nature=NatureBien.objects.get(pk=nat),
-            sous_famille=SousFamille.objects.get(pk=fam),
+            nature=NatureBien.objects.get(pk=nn),
+            sous_famille=SousFamille.objects.get(pk=nf),
             typeProp=typeA,
             durée_util=du,
             etat_achat=ea,

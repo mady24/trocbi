@@ -61,6 +61,8 @@ def passer(request):
 
 def passerAjouter(request):
     print(request.POST)
+    nn = 0
+    nf = 0
     if(request.POST['newNat'] == ''):
         so = NatureBien(nature=request.POST['newNat'])
         so.save()

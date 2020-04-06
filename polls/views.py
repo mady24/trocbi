@@ -63,12 +63,12 @@ def passerAjouter(request):
     print(request.POST)
     nn = 0
     nf = 0
-    if(request.POST['newNat'] == ''):
+    if(request.POST['newNat'] != ''):
         so = NatureBien(nature=request.POST['newNat'])
         so.save()
         sos = NatureBien.objects.order_by('-id')[:1]
         nn= sos.id
-    if(request.POST['newFam'] == ''):
+    if(request.POST['newFam'] != ''):
         so = SousFamille(sous_famille=request.POST['newFam'])
         so.save()
         sos = SousFamille.objects.order_by('-id')[:1]

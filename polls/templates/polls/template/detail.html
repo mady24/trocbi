@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>TrocBi</title>
+</head>
+
+<body>
+    <div class="headerl">
+        <div class="nav">
+            <div class="logo">
+                <img src="{% static 'img/logo.png'%}" alt="">
+            </div>
+            <div class="sub">
+                <ul>
+                    <li>
+                        <a class="scrolle button-small button-primary" {% if user.is_authenticated %} href="polls/passerannonce" {% else %} href="polls/login" {% endif %}>Déposer une annonce</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li><a class="st" href="#">Mes favoris</a></li>
+                    <li>
+                    <div class="dropdown">
+                        <img src="{% static 'img/user.png' %}" onclick="myFunction()" class="dropbtn">
+                        <div id="myDropdown" class="dropdown-content">
+                          <a href="#">Mon profil</a>
+                          <a href="logout">Se déconnecter</a>
+                        </div>
+                      </div>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="polls/login" class="button-small button-primary">Connexion</a>
+                    </li>
+                    <li>
+                        <a class="button-small button-flat">Inscription</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="content cl">
+
+        </div>
+    </div>
+    <div class="search">
+        <div class="searchForm">
+            <form action="">
+                <div class="row form">
+                    <div class="col-lg-3">
+                        <select name="categorie" id="" class="select-css">
+                            {% for prop in sousFamille %}
+                            <option>{{ prop.sous_famille}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" name="" id="" class="formControl">
+                    </div>
+                    <div class="col-lg-3">
+                        <input type="button" value="Rechercher" class="button button-secondary">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="details">
+        <div class="cat">
+            <h6 class="catT">Catégories:&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+            <h6 class="catTs">{{post.nature}}</h6>
+        </div>
+        <div class="detailF">
+            <div class="detailIPR">
+                <div class="im">
+                    <div class="imB">
+                        {% if post.image1.url != null %}
+                <img src="{{post.image1.url}}" alt="">
+                {% else %}
+                <img src="{% static 'img/not-found.png' %}" alt="">
+                {% endif %}
+                    </div>
+                    <div class="imS">
+                        <div class="imST">
+                            {% if post.image2.url != null %}
+                            <img src="{{post.image2.url}}" alt="">
+                            {% else %}
+                            <img src="{% static 'img/not-found.png' %}" alt="">
+                            {% endif %}
+                        </div>
+                        <div class="imSB">
+                            {% if post.image3.url != null %}
+                <img src="{{post.image3.url}}" alt="">
+                {% else %}
+                <img src="{% static 'img/not-found.png' %}" alt="">
+                {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="pr">
+                    <h1 class="detailD">
+                        Détails :
+                    </h1>
+                    <div class="detailT">
+                        <h3 class="prix">
+                            Prix :
+                        </h3>
+                        <h3 class="ref">
+                            Réf :
+                        </h3>
+                    </div>
+                    <div class="detailC">
+                        <h5 class="prixD">
+                            {{post.prix_achat}} fcfa
+                        </h5>
+                        <h5 class="refD">
+                            {{post.id}}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="detailO" align="center">
+                <img src="{% static 'img/user.png'%}" alt="">
+                <h6 class="ownerN">
+                    Arame Ndiaye
+                </h6>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="button button-third">Contacter</a>
+            </div>
+        </div>
+        <div class="detailDescri">
+            <h1>
+                Description :
+            </h1>
+            <p>
+                {{post.description}}
+            </p>
+        </div>
+        <div class="articles">
+            <div class="articlesT">
+                <h1>Artciles :</h1>
+            </div>
+            <div class="articlesL">
+                <div class="articlesLC">
+                    <img src="img/howard-bouchevereau-RSCirJ-2.png" alt="">
+                    <h1>MacBook Pro 2016</h1>
+                </div>
+                <div class="articlesLC">
+                    <img src="img/howard-bouchevereau-RSCirJ-2.png" alt="">
+                    <h1>MacBook Pro 2016</h1>
+                </div>
+                <div class="articlesLC">
+                    <img src="img/howard-bouchevereau-RSCirJ-2.png" alt="">
+                    <h1>MacBook Pro 2016</h1>
+                </div>
+                <div class="articlesLC">
+                    <img src="img/howard-bouchevereau-RSCirJ-2.png" alt="">
+                    <h1>MacBook Pro 2016</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="social">
+            <ul class="su">
+                <li><a href=""><i class="fa fa-facebook-square"></i></a></li>
+                <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                <li><a href=""><i class="fa fa-instagram"></i></a></li>
+            </ul>
+        </div>
+        <div class="nc">
+            Contact Number: 00221773832393
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            $(document).scroll(function () {
+                var $nav = $(".nav");
+                $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+            });
+        });
+
+        function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+    </script>
+</body>
+
+</html>

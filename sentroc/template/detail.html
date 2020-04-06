@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>TrocBi</title>
+</head>
+
+<body>
+    <div class="headerl">
+        <div class="nav">
+            <div class="logo">
+                <img src="img/logo.png" alt="">
+            </div>
+            <div class="sub">
+                <ul>
+                    <li>
+                        <button class="scrolle button-small button-primary">Déposer une annonce</button>
+                    </li>
+                    <li>
+                        <button class="button-small button-primary">Connexion</button>
+                    </li>
+                    <li>
+                        <button class="button-small button-flat">Inscription</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="content cl">
+
+        </div>
+    </div>
+    <div class="search">
+        <div class="searchForm">
+            <form action="">
+                <div class="row form">
+                    <div class="col-lg-3">
+                        <select name="categorie" id="" class="select-css">
+                            <option value="">&#127919;firstOption</option>
+                            <option value="">secondOption</option>
+                            <option value="">...Option</option>
+                            <option value="">nstOption</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" name="" id="" class="formControl">
+                    </div>
+                    <div class="col-lg-3">
+                        <input type="button" value="Rechercher" class="button button-secondary">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="details">
+        <div class="cat">
+            <h6 class="catT">Catégories:&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+            <h6 class="catTs"></h6>
+        </div>
+        <div class="detailF">
+            <div class="detailIPR">
+                <div class="im">
+                    <div class="imB">
+                        <img src="img/jason-leem-1.png" alt="">
+                    </div>
+                    <div class="imS">
+                        <div class="imST">
+                            <img src="img/ionut-andrei-coman-rZ3fA76Jsdc-unsplash.png" alt="">
+                        </div>
+                        <div class="imSB">
+                            <img src="img/fabian-albert-iiPOd73iCUQ-unsplash.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="pr">
+                    <h1 class="detailD">
+                        Détails :
+                    </h1>
+                    <div class="detailT">
+                        <h3 class="prix">
+                            Prix :
+                        </h3>
+                        <h3 class="ref">
+                            Réf :
+                        </h3>
+                    </div>
+                    <div class="detailC">
+                        <h5 class="prixD">
+                            310.000 fcfa
+                        </h5>
+                        <h5 class="refD">
+                            05775O869
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="detailO" align="center">
+                <img src="img/user.png" alt="">
+                <h6 class="ownerN">
+                    Arame Ndiaye
+                </h6>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="button button-third">Contacter</a>
+            </div>
+        </div>
+        <div class="detailDescri">
+            <h1>
+                Description :
+            </h1>
+            <p>
+                Arame vous offre son arrivage de iPhone 7 Plus de 128 Go, états neufs non scellés, venant des états unis débloqués tout opérateur avec ses accessoires originales en couleurs gold, silver, rouge, rose gold et noir mat. Téléphone original, authentique, garantie, vendu avec facture. venez vite dans mon magasin Apple Shop ou faites-vous livrer gratuitement. Blindé et anti-choc offert avec une livraison gratuite.
+            </p>
+        </div>
+        <div class="articles">
+            <div class="articlesT">
+                <h1>Artciles :</h1>
+            </div>
+            <div class="articlesL">
+                <div class="articlesLC">
+                    <img src="img/howard-bouchevereau-RSCirJ-2.png" alt="">
+                    <h1>MacBook Pro 2016</h1>
+                </div>
+                <div class="articlesLC">
+                    <img src="img/howard-bouchevereau-RSCirJ-2.png" alt="">
+                    <h1>MacBook Pro 2016</h1>
+                </div>
+                <div class="articlesLC">
+                    <img src="img/howard-bouchevereau-RSCirJ-2.png" alt="">
+                    <h1>MacBook Pro 2016</h1>
+                </div>
+                <div class="articlesLC">
+                    <img src="img/howard-bouchevereau-RSCirJ-2.png" alt="">
+                    <h1>MacBook Pro 2016</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="social">
+            <ul class="su">
+                <li><a href=""><i class="fa fa-facebook-square"></i></a></li>
+                <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                <li><a href=""><i class="fa fa-instagram"></i></a></li>
+            </ul>
+        </div>
+        <div class="nc">
+            Contact Number: 00221773832393
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            $(document).scroll(function () {
+                var $nav = $(".nav");
+                $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+{% if postProp %}
+    <ul>
+    {% for prop in postProp %}
+        <li><a href="/polls/{{ prop.id }}/">{{ prop.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

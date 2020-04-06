@@ -1,0 +1,248 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>TrocBi</title>
+</head>
+
+<body>
+    <div class="headerl">
+        <div class="nav">
+            <div class="logo">
+                <img src="{% static 'img/logo.png' %}" alt="">
+            </div>
+            <div class="sub">
+                <ul>
+                    <li>
+                        <a class="scrolle button-small button-primary" {% if user.is_authenticated %} href="polls/passerannonce" {% else %} href="polls/login" {% endif %}>Déposer une annonce</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li><a class="st" href="#">Mes favoris</a></li>
+                    <li>
+                    <div class="dropdown">
+                        <img src="{% static 'img/user.png' %}" onclick="myFunction()" class="dropbtn">
+                        <div id="myDropdown" class="dropdown-content">
+                          <a href="#">Mon profil</a>
+                          <a href="logout">Se déconnecter</a>
+                        </div>
+                      </div>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="polls/login" class="button-small button-primary">Connexion</a>
+                    </li>
+                    <li>
+                        <a class="button-small button-flat">Inscription</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="cl1">
+            <h1>Déposer une annonce</h1>
+        </div>
+    </div>
+    <!--<div class="search">
+        <div class="searchForm">
+            <form action="">
+                <div class="row form">
+                    <div class="col-lg-3">
+                        <select name="categorie" id="" class="select-css">
+                            <option value="">&#127919;firstOption</option>
+                            <option value="">secondOption</option>
+                            <option value="">...Option</option>
+                            <option value="">nstOption</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" name="" id="" class="formControl">
+                    </div>
+                    <div class="col-lg-3">
+                        <input type="button" value="Rechercher" class="button button-secondary">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>-->
+    <div class="postP">
+        <div class="postPT">
+            <h1>Que souhaitez-vous</h1>
+        </div>
+        <div class="postPF">
+            <form action="passannonceinsertion" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="ranger">
+                    <div class="colone">
+                        <label for="nameA">Nom de l'annoce</label>
+                        <input type="text" name="nameA" id="nameA" class="formControl">
+                    </div>
+                    <div class="colone">
+                        <label for="nat">Nature</label>
+                        <select name="nat" id="nat" class="select-css1">
+                            <option value=""></option>
+                            {% for prop in nat %}
+                            <option value="{{ prop.id }}">{{ prop.nature}}</option>
+                            {% endfor %}
+                            <option value="autre">autre</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="ranger">
+                    <div class="colone">
+                        <label for="catA">Catégorie</label>
+                        <select name="catA" id="catA" class="select-css1">
+                            {% for prop in sousFamille %}
+                            <option value="{{ prop.id }}">{{ prop.sous_famille}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="colone">
+                        Type de l'annonce
+                        <div class="ranger">
+                            <div class="colone">
+                                <input type="radio" name="type" id="type1" value="offre" class="" onclick="con()" checked>
+                                <label for="type1">Offre</label>
+                                <br><span>Vous vendez une chose</span>
+                        
+                            </div>
+                            <div class="colone">
+                                <input type="radio" name="type" id="type2" value="demande" onclick="con()" class="">
+                                <label for="type2">Demande</label>
+                                <br><span>Vous chercher une chose</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ranger">
+                    <div class="colone2">
+                        <label for="du">Durée utilisation</label>
+                        <input type="text" name="du" id="du" class="formControl">
+                    </div>
+                    <div class="colone2">
+                        <label for="da">Date acquisition</label>
+                        <input type="date" name="da" id="da" class="formControl">
+                    </div>
+                    <div class="colone2"  id="img">
+                        <label for="ea">État acquisition</label>
+                        <select name="ea" id="ea" class="select-css1">
+                            <option value="NEUF">NEUF</option>
+                            <option value="DEUXIEME MAIN">DEUXIEME MAIN</option>
+                            <option value="OCCASION">OCCASION</option>
+                            <option value="INCONU">INCONU</option>
+                        </select>
+                    </div>
+                    <div class="colone2">
+                        <label for="eac">État actuel</label>
+                        <select name="eac" id="eac" class="select-css1">
+                            <option value="NEUF">NEUF</option>
+                            <option value="BON ETAT">BON ETAT</option>
+                            <option value="MOYEN">MOYEN</option>
+                            <option value="MEDIOCRE">MEDIOCRE</option>
+                            <option value="TRES DEGRADE">TRES DEGRADE</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="ranger">
+                    <div class="colone2">
+                        <label for="prix">Prix</label>
+                        <input type="number" name="prix" id="prix" class="formControl">
+                    </div>
+                </div>
+                <div class="ranger">
+                    <div class="colone">
+                        <label for="desc">Description</label>
+                        <textarea name="desc" id="desc" cols="30" rows="10" class="formControl"></textarea>
+                    </div>
+                </div>
+                <div class="ranger" id="img1">
+                    <div class="colone">
+                <div class="ranger">
+                    <div class="colone3">
+                        <div class="upload-btn-wrapper">
+                            <input type="file" name="img1" />
+                          </div>
+                    </div>
+                    <div class="colone3">
+                        <div class="upload-btn-wrapper">
+                            <input type="file" name="img2" />
+                          </div>
+                    </div>
+                    <div class="colone3">
+                        <div class="upload-btn-wrapper">
+                            <input type="file" name="img3" />
+                          </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+                <div class="ranger">
+                    <div class="colone4">
+                        <input type="submit" value="Valider l'annonce" class="button button-fourth">
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="social">
+            <ul class="su">
+                <li><a href=""><i class="fa fa-facebook-square"></i></a></li>
+                <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                <li><a href=""><i class="fa fa-instagram"></i></a></li>
+            </ul>
+        </div>
+        <div class="nc">
+            Contact Number: 00221773832393
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            $(document).scroll(function () {
+                var $nav = $(".nav");
+                $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+            });
+        });
+
+        function con(){
+            $(document).ready(function(){
+                var isChecked = $('#type1').prop('checked');
+                if(isChecked == true){
+                    $('#img').css('display', 'block');
+                    $('#img1').css('display', 'block');
+                }else{
+                    $('#img').css('display', 'none');
+                    $('#img1').css('display', 'none');
+                }
+            });
+        }
+
+        function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+    </script>
+</body>
+
+</html>

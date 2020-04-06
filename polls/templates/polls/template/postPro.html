@@ -106,7 +106,7 @@
                 <div class="ranger">
                     <div class="colone">
                         <label for="catA">Catégorie</label>
-                        <select name="catA" id="catA" onchange="newRanger1(this);"  class="select-css1">
+                        <select name="catA" id="catA" onchange="newRanger(this);"  class="select-css1">
                             {% for prop in sousFamille %}
                             <option value="{{ prop.id }}">{{ prop.sous_famille}}</option>
                             {% endfor %}
@@ -135,8 +135,8 @@
 
                     </div>
                     <div class="colone">
-                        <label for="newFam">Donner le nom de la catégorie</label>
-                        <input type="text" name="newFam" id="newFam" class="formControl">
+                        <label for="newNat">Donner le nom de la catégorie</label>
+                        <input type="text" name="newNat" id="newNat" class="formControl">
                     </div>
                 </div>
                 <div class="ranger">

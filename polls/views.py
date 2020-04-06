@@ -61,6 +61,12 @@ def passer(request):
 
 def passerAjouter(request):
     print(request.POST)
+    if(request.POST['newNat'] == ''):
+        so = NatureBien(nature=request.POST['newNat'])
+        so.save()
+    if(request.POST['newFam'] == ''):
+        so = SousFamille(sous_famille=request.POST['newFam'])
+        so.save()
     if(request.POST['type'] == 'demande'):
         name = request.POST['nameA']
         nat = request.POST['nat']

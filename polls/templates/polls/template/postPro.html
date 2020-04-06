@@ -85,7 +85,7 @@
                     </div>
                     <div class="colone">
                         <label for="nat">Nature</label>
-                        <select name="nat" id="nat" class="select-css1">
+                        <select name="nat" id="nat"  onchange="newRanger1(this);" class="select-css1">
                             <option value=""></option>
                             {% for prop in nat %}
                             <option value="{{ prop.id }}">{{ prop.nature}}</option>
@@ -94,13 +94,23 @@
                         </select>
                     </div>
                 </div>
+                <div class="ranger" id="NatRow">
+                    <div class="colone">
+
+                    </div>
+                    <div class="colone">
+                        <label for="newFam">Donner le nom de la nature</label>
+                        <input type="text" name="newNat" id="newNat" class="formControl">
+                    </div>
+                </div>
                 <div class="ranger">
                     <div class="colone">
                         <label for="catA">Catégorie</label>
-                        <select name="catA" id="catA" class="select-css1">
+                        <select name="catA" id="catA" onchange="newRanger1(this);"  class="select-css1">
                             {% for prop in sousFamille %}
                             <option value="{{ prop.id }}">{{ prop.sous_famille}}</option>
                             {% endfor %}
+                            <option value="other">Autre</option>
                         </select>
                     </div>
                     <div class="colone">
@@ -118,6 +128,15 @@
                                 <br><span>Vous chercher une chose</span>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="ranger" id="FamRow">
+                    <div class="colone">
+
+                    </div>
+                    <div class="colone">
+                        <label for="newFam">Donner le nom de la catégorie</label>
+                        <input type="text" name="newFam" id="newFam" class="formControl">
                     </div>
                 </div>
                 <div class="ranger">
@@ -242,6 +261,26 @@ window.onclick = function(event) {
     }
   }
 }
+
+function newRanger(that){
+            if(that.value == 'other'){
+                document.getElementById('FamRow').style.display = 'block';
+                console.log('tested with succes');
+            }
+            else{
+                document.getElementById('FamRow').style.display = 'none';
+            }
+    }
+
+    function newRanger1(that){
+            if(that.value == 'other'){
+                document.getElementById('NatRow').style.display = 'block';
+                console.log('tested with succes');
+            }
+            else{
+                document.getElementById('NatRow').style.display = 'none';
+            }
+    }
     </script>
 </body>
 

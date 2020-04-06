@@ -29,7 +29,7 @@ class NatureBien(models.Model):
 
 class SousFamille(models.Model):
     sous_famille = models.CharField(max_length=200)
-    dexcription = models.CharField(max_length=1000)
+    dexcription = models.CharField(max_length=1000, null=True)
     def __str__(self):
         return self.sous_famille
 

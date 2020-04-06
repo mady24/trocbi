@@ -66,14 +66,14 @@ def passerAjouter(request):
     if(request.POST['newNat'] != ''):
         so = NatureBien(nature=request.POST['newNat'])
         so.save()
-        sos = NatureBien.objects
+        sos = NatureBien.objects.order_by('nature')
         for n in sos :
             if(n.nature == request.POST['newNat']):
                 nn= sos.id
     if(request.POST['newFam'] != ''):
         so = SousFamille(sous_famille=request.POST['newFam'])
         so.save()
-        sos = SousFamille.objects
+        sos = SousFamille.objects.order_by('sous_famille')
         for n in sos :
             if(n.nature == request.POST['newFam']):
                 nf= sos.id

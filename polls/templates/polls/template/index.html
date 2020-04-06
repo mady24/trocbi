@@ -21,7 +21,7 @@
             <div class="sub">
                 <ul>
                     <li>
-                        <a class="scrolle button-small button-primary" {% if user.is_authenticated %} href="passerannonce" {% else %} href="login" {% endif %}>Déposer une annonce</a>
+                        <a class="scrolle button-small button-primary" {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}>Déposer une annonce</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li><a class="st" href="#">Mes favoris</a></li>
@@ -30,7 +30,7 @@
                         <img src="{% static 'img/user.png' %}" onclick="myFunction()" class="dropbtn">
                         <div id="myDropdown" class="dropdown-content">
                           <a href="#">Mon profil</a>
-                          <a href="logout">Se déconnecter</a>
+                          <a href="/logout">Se déconnecter</a>
                         </div>
                       </div>
                     </li>
@@ -55,7 +55,7 @@
                 </h1>
             </div>
             <div class="post">
-                <a {% if user.is_authenticated %} href="passerannonce" {% else %} href="login" {% endif %} class="button-big button-primary">Déposer une annonce</a>
+                <a {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %} class="button-big button-primary">Déposer une annonce</a>
             </div>
         </div>
     </div>
@@ -198,7 +198,7 @@
         {% else %}
         <p>No polls are available.</p>
         {% endif %}
-        <div class="vp" align="center"><a href="list" class="button-big button-secondary-sa">Voir Plus +</a></div>
+        <div class="vp" align="center"><a href="/list" class="button-big button-secondary-sa">Voir Plus +</a></div>
     </div>
     <div class="newsletter">
         <div class="textletter">

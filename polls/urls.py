@@ -13,5 +13,6 @@ urlpatterns = [
     path('login', views.loginform, name='login'),
     path('loginprocess', views.loginprocess, name='loginprocess'),
     path('logout', views.logout_view, name="logout"),
+    path('signup', views.signup, name="signin"),
     path('list', views.list, name='list'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

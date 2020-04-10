@@ -5,33 +5,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
-    <title>Connexion</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>TrocBi</title>
 </head>
 
-<body>
-    <div class="loginForm" align='center'
-        style="min-width: 300px; max-width: 300px; min-height: 200px; max-height: 200px; position: absolute; top: calc(50% - 100px); left: calc(50% - 150px);">
-        <div class="logo">
-            <img src="{% static 'img/logo.png' %}" alt="logo">
+<body class="logIn">
+    <div class="headerl">
+        <div class="nav">
+            
+            <div class="logo">
+                <a href="/"><img src="{% static 'img/logo.png'%}" alt=""></a>
+            </div>
+            <div class="sub">
+                <ul>
+                    <li>
+                        <a class="scrolle btn btn-third" href="/#search"><i class="fa fa-search"></i> Rechercher</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="cl2">
+            <h1 style="text-align: center;">Se Connecter</h1>
+        </div>
+    </div>
+    <div style="max-width: 20%; min-width: 20%; position: absolute; margin-top: 5%; margin-left: 40%; border: 1px solid rgba(112,112,112,.16);box-shadow: 1px 2px rgba(0,0,0,0.16); padding-top: 2%; padding-left: 5%; padding-right: 5%; padding-bottom: 2%;">
+    <div class="loginForm">
+        <div class="formHeader">
+            <h6 style="text-align: center;">Bonjour</h6>
+            <p>Connectez-vous pour découvrir toutes nos fonctionnalités.</p>
         </div>
         <div class="formLogin">
-            <form action="loginprocess" method="POST">
+            <form action="/loginprocess" method="POST">
                 {% csrf_token %}
-                <div style="line-height: 35px">
+                <div>
                     <label for="logID">Login</label><br>
-                    <input type="text" name="logID" id="logID" class="formControl">
+                    <input type="text" name="logID" id="logID" class="form-control">
                 </div>
-                <div style="line-height: 35px">
+                <div>
                     <label for="passwd">Mot de passe</label>
-                    <input type="password" name="passwd" id="passwd" class="formControl">
+                    <input type="password" name="passwd" id="passwd" class="form-control">
                 </div>
-                <div style="padding-left: 5%; padding-top: 5%;">
-                    <input type="submit" value="Se connecter" class="button button-fourth">
+                <div class=".align-content-xl-center" style="padding-left: 20%; padding-right: 20%; padding-top: 2%;" align="center">
+                    <input type="submit" value="Se connecter" class="btn btn-sm btn-third btn-block">
                 </div>
             </form>
         </div>
     </div>
+    <div class="signIn">
+        <hr>
+         <p>Envie de nous rejoindre? Créer un compte</p>
+         <div class=".align-content-xl-center" style="padding-left: 20%; padding-right: 20%; padding-top: 2%;" align="center">
+         <a href="/signup" class="btn btn-sm btn-fourth btn-block">S'inscrire</a>
+         </div>
+    </div>
+</div>
+<div style="" class="logInFooter"></div>
 </body>
 
 </html>

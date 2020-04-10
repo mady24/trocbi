@@ -21,7 +21,7 @@
             <div class="sub">
                 <ul>
                     <li>
-                        <a class="scrolle button-small button-primary" {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}>Déposer une annonce</a>
+                        <a class="scrolle btn btn-primary" {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}>Déposer une annonce</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li><a class="st" href="#">Mes favoris</a></li>
@@ -36,10 +36,10 @@
                     </li>
                     {% else %}
                     <li>
-                        <a href="/login" class="button-small button-primary">Connexion</a>
+                        <a href="/login" class="btn btn-primary">Connexion</a>
                     </li>
                     <li>
-                        <a class="button-small button-flat">Inscription</a>
+                        <a href="/signup" class="btn btn-secondary">Inscription</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -64,7 +64,7 @@
                         <input type="text" name="" id="" class="formControl">
                     </div>
                     <div class="col-lg-3">
-                        <input type="button" value="Rechercher" class="button button-secondary">
+                        <input type="button" value="Rechercher" class="btn btn-secondary">
                     </div>
                 </div>
             </form>
@@ -129,7 +129,7 @@
                 <h6 class="ownerN">
                     Arame Ndiaye
                 </h6>
-                <a href="#" target="_blank" rel="noopener noreferrer" class="button button-third">Contacter</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-third">Contacter</a>
             </div>
         </div>
         <div class="detailDescri">

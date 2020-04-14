@@ -10,46 +10,65 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title>TrocBi</title>
+    <style>
+        body{
+            margin-top: 0;
+        }
+
+        input[type=submit]{
+            bottom: 0; 
+            position: absolute;
+        }
+
+        @media screen and (max-width: 1000px){
+            input[type=submit]{
+            bottom: 0; 
+            position: relative;;
+        }
+        }
+    </style>
 </head>
 
 <body>
     <div class="header">
-        <div class="nav">
-            <div class="logo">
-                <a href="/"><img src="{% static 'img/logo.png'%}" alt=""></a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light-1 fixed-top">
+            <a class="navbar-brand" href="/"><img src="{% static 'img/logo.png'%}" alt="" style="height:40px;"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link scrolle btn btn-primary" {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}>Déposer une annonce</a>
+                </li>
+                <li class="nav-item" style="border-right: #000 solid 1px;">
+                  <a class="nav-link" href="#search"><i class="fa fa-search" style="font-size: 20px; font-weight:lighter;"></i></a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mes favoris</a>
+                  </li>
+                <li class="nav-item dropdown dropleft">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{% static 'img/user.png' %}" style="height:20px;">
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Mon profil</a>
+                    <a class="dropdown-item" href="logout">Deconnexion</a>
+                  </div>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link btn btn-primary" href="login">Connexion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-secondary" href="signup">Inscription</a>
+                  </li>
+                  {% endif %}
+              </ul>
             </div>
-            <div class="sub">
-                <ul>
-                    <li>
-                        <a class="scrolle btn btn-primary" {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}>Déposer une annonce</a>
-                    </li>
-                    <li style="border-right: #000 solid 1px;">
-                        <a href="#search">
-                            <i class="fa fa-search" style="font-size: 30px; font-weight:lighter;"></i>
-                        </a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li><a class="st" href="#">Mes favoris</a></li>
-                    <li>
-                    <div class="dropdown">
-                        <img src="{% static 'img/user.png' %}" onclick="myFunction()" class="dropbtn">
-                        <div id="myDropdown" class="dropdown-content">
-                          <a href="#">Mon profil</a>
-                          <a href="/logout">Se déconnecter</a>
-                        </div>
-                      </div>
-                    </li>
-                    {% else %}
-                    <li>
-                        <a href="login" class="btn btn-primary">Connexion</a>
-                    </li>
-                    <li>
-                        <a href="/signup" class="btn btn-secondary">Inscription</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
+          </nav>
         <div class="content">
             <div class="slogan">
                 <h1 class="slog">
@@ -165,18 +184,18 @@
         {% if prop %}
 
         {% for prop in prop %}
-        <div class="recentItem" onclick="linkTo('{{ prop.id }}')">
-            <div class="recentImg">
+        <div class="row recentItem" onclick="linkTo('{{ prop.id }}')">
+            <div class="col-lg-4 recentImg">
                 {% if prop.image1.url != null %}
                 <img src="{{prop.image1.url}}" alt="">
                 {% else %}
                 <img src="{% static 'img/not-found.png' %}" alt="">
                 {% endif %}
             </div>
-            <div class="recentDetails">
-                <h1 class="recentDetailsTitle">
+            <div class=" col-lg-8 recentDetails">
+                <h3 class="recentDetailsTitle">
                     {{ prop.name}}
-                </h1>
+                </h3>
                 <div class="recentDetailsDescrip">
                     <h6 class="recentDetailsDescripSub">
                         Stockage 128 Go
@@ -247,32 +266,36 @@
                         class="form-control"></textarea>
                 </div>
                 <div class="col-lg-6">
-                    <div class="row"  style="min-height: 50%; max-height: 50%;">
+                    <div class="row">
                         <div class="col">
                         <label for="tel">Numéro de téléphone</label>
-                        <input style="position: absolute; margin-top: O;" type="tel" name="" id="tel" placeholder="778239231" class="form-control">
+                        <input type="tel" name="" id="tel" placeholder="778239231" class="form-control">
                     </div>
                     </div>
-                    <div class="row"  style="min-height: 50%; max-height: 50%;">
-                        <input type="submit" value="Envoyer" style="margin-bottom: 0; margin-left: 5%; position: absolute; bottom: 0;  height: 15%; width: 30%;" class="btn btn-third">
+                    <div class="row">
+                        <input type="submit" value="Envoyer" class="btn btn-third">
                     </div>
                 </div>
             </div>
         </form>
     </div>
     <div class="footer">
-        <div class="social">
-            <ul class="su">
-                <li><a href=""><i class="fa fa-facebook-square"></i></a></li>
-                <li><a href=""><i class="fa fa-twitter"></i></a></li>
-                <li><a href=""><i class="fa fa-instagram"></i></a></li>
-            </ul>
-        </div>
-        <div class="nc">
-            Contact Number: 00221773832393
-        </div>
+        <div class="row" style="width: 100%;">
+            <div class="col-lg-6 social">
+                <ul class="su">
+                    <li><a href=""><i class="fa fa-facebook-square"></i></a></li>
+                    <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                    <li><a href=""><i class="fa fa-instagram"></i></a></li>
+                </ul>
+            </div>
+            <div class="col-lg-6 nc">
+                Contact Number: 00221773832393
+            </div>
+            </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{% static 'bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'popper.min.js'%}"></script>
     <script>
         $(function () {
             $(document).scroll(function () {
@@ -286,6 +309,7 @@
                 var $nav = $(".nav");
                 var scrolle = $(".scrolle");
                 $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+                $(body).css('margin-top', '70px', $(this).scrollTop() > $nav.height());
                 give.toggleClass('scrolled', $(this).scrollTop() > (m));
                 if ($(this).scrollTop() > height.top) {
                     //alert('true');

@@ -1,13 +1,13 @@
 from django.contrib import admin
 
-from .models import NatureBien
-from .models import SousFamille
-from .models import PostProp
-from .models import PostSearch
+from .models import *
+
 
 admin.site.register(NatureBien)
 admin.site.register(SousFamille)
 admin.site.register(PostProp)
 admin.site.register(PostSearch)
+admin.site.register(Profile)
+admin.site.register(Avatar)
 
 # Register your models here.

@@ -4,14 +4,17 @@ from django.template import loader
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils import timezone
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.db import transaction
 
 from .models import PostProp
 from .models import SousFamille
 from .models import PostSearch
 from .models import NatureBien
-from .form import SignUpForm
+from .form import *
 
 ETAT_ACHAT = (
     ("NEUF", "NEUF"),
@@ -150,5 +153,31 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
 
+@login_required
+@transaction.atomic
+def profile(request):
+    profile = Avatar.objects.filter(user=request.user)
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        avatar_form = AvatarForm(request.FILES['avatar'], instance=request.user.avatar)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            avatar_form.save()
+            messages.success(request, 'Votre profile a été mis a jour avec succès')
+            return redirect('profile')
+        else:
+            messages.error(request, 'Veuillez corriger les erreurs ci-dessous.')
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile)
+        avatar_form = AvatarForm( instance=request.user.avatar)
+    return render(request, 'registration/profil.html',{
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'avatar_form': avatar_form,
+        'profile': profile
+    })
 
 # Create your views here.

@@ -4,8 +4,7 @@
 }
 
 body{
-    margin-top: 0;
-    margin: 0;
+    margin-top: 70px;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -22,6 +21,17 @@ label,p{
 small{
     font-size: 2px;
     font-weight: 100;
+}
+
+.navbar{
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+
+
+.navbar-nav li{
+
 }
 
 .help-block{
@@ -374,7 +384,6 @@ small{
 }
 
  .cat{
-    height: 30vh;
     width: 80%;
     margin-left: 5%;
     padding-top: .8vh;
@@ -384,19 +393,22 @@ small{
 }
 
 .categorie .cat .catImg{
-    height: 21vh;
+
     background-color: rgba(250,48,62,.09);
-    width: 60%;
     margin-left: 5%;
-    border-radius: 300px;
+    margin-right: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 50%;
     
 }
 
 .categorie .cat .catImg img{
-    height: 50%;
-    width: 50%;
+    height: 100px;
     margin-top: 25%;
     margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 25%;
 }
 
 .categorie .cat .catTitle{
@@ -423,6 +435,13 @@ small{
 .recent{
     width: 70%;
     margin-left: 15%;
+}
+
+@media screen and (max-width: 700px) {
+    .recent{
+        width: 100%;
+        margin-left: 0;
+    }
 }
 
 .recent .recentItem{
@@ -498,37 +517,27 @@ small{
     height: 10%;
     margin-top: 5%;
     margin-bottom: 5%;
-    display: flex;
 }
 .recent .pos .posLeft{
-    border: 1px #AEAFB0 solid;
-    border-radius: 10px;
+   content: '\f359';
     font-weight: 100;
     font-size: 40px;
-    height: 50px;
-    width: 50px;
+    height: 5%;
+    width: 5%;
     line-height: 40px;
 }
 
-.recent .pos .posLeft span{
-    margin-top: 5px;
-    margin-left: 15px;
-}
+
 
 .recent .pos .posRight{
-    border: 1px solid;
-    border-radius: 10px;
     font-weight: 100;
     font-size: 40px;
-    height: 50px;
-    width: 50px;
+    height: 5%;
+    width: 5%;
     line-height: 40px;
 }
 
-.recent .pos .posRight span{
-    margin-top: 5px;
-    margin-left: 15px;
-}
+
 
 .recent .pos .posScale{
     display: flex;
@@ -540,7 +549,7 @@ small{
     height: 1px;
     border: 1px #AEAFB0 solid;
     margin-left: 3px;
-    width: 15px;
+    min-width: 3%;
     margin-top: 24.5px;
     border-radius: 0.5px;
 }
@@ -645,11 +654,10 @@ small{
 }
 
 .footer .social{
-    width: 50%;
-    height: 10vh;
+    
 }
 
-.footer .social .su{
+.footer  .social .su{
     display: flex;
 }
 
@@ -675,8 +683,7 @@ small{
     color: #FA303E;
 }
 
-.footer .nc{
-    width: 50%;
+.footer .nc{ 
     text-align: right;
     padding-top: 3vh;
 }
@@ -690,7 +697,7 @@ a:hover{
     margin-right: 10%;
 }
 
-.details .cat{
+.details .cat1{
     display: flex;
     margin-top: 5%;
     margin-bottom: 5%;

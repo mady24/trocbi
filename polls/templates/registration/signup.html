@@ -25,44 +25,57 @@
             margin-bottom: 0;
             padding: 0;
         }
+
+        .footer{
+            position: absolute; 
+            bottom: 0; 
+            width: 100%;
+        }
+        @media screen and (max-width: 700px) {
+        .footer {
+          position: relative;
+        }
+      }
     </style>
 </head>
 
 <body class="logIn">
     <div class="headerl">
-        <div class="nav">
-            <div class="logo">
-                <a href="/"><img src="{% static 'img/logo.png'%}" alt=""></a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <a class="navbar-brand" href="/"><img src="{% static 'img/logo.png'%}" alt="" style="height:40px;"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class=" btn btn-third btn-block" href="#search"><i class="fa fa-search" style="font-size: 20px; font-weight:lighter;"> Rechercher</i></a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mes favoris</a>
+                  </li>
+                <li class="nav-item dropdown dropleft">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{% static 'img/user.png' %}" style="height:20px;">
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Mon profil</a>
+                    <a class="dropdown-item" href="logout">Deconnexion</a>
+                  </div>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="btn btn-primary btn-block" href="login">Connexion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-secondary btn-block" href="signup">Inscription</a>
+                  </li>
+                  {% endif %}
+              </ul>
             </div>
-            <div class="sub">
-                <ul>
-                    <li>
-                        <a class="scrolle btn btn-fourth" {% if user.is_authenticated %} href="/passerannonce"
-                            {% else %} href="/login" {% endif %}><img src="{% static 'img/add-button.png' %}"> Déposer
-                            une annonce</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li><a class="st" href="#">Mes favoris</a></li>
-                    <li>
-                        <div class="dropdown">
-                            <img src="{% static 'img/user.png' %}" onclick="myFunction()" class="dropbtn">
-                            <div id="myDropdown" class="dropdown-content">
-                                <a href="#">Mon profil</a>
-                                <a href="/logout">Se déconnecter</a>
-                            </div>
-                        </div>
-                    </li>
-                    {% else %}
-                    <li>
-                        <a href="/login" class="btn btn-primary">Connexion</a>
-                    </li>
-                    <li>
-                        <a href="/signup" class="btn btn-secondary">Inscription</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
+          </nav>
         <div class="content cl">
 
         </div>
@@ -91,8 +104,9 @@
 
     <div class="signUp">
         <h1>Inscription</h1>
-        <div
-            style="max-width: 20%; min-width: 20%; position: absolute; margin-top: 1%; border: 1px solid rgba(112,112,112,.16);box-shadow: 1px 2px rgba(0,0,0,0.16); padding-top: 1%; padding-left: 5%; padding-right: 5%; padding-bottom: 1%;">
+        <div class="row">
+        <div class="col-lg-5 col-sm-12"
+            style="border: 1px solid rgba(112,112,112,.16);box-shadow: 1px 2px rgba(0,0,0,0.16);">
 
             <div class="loginForm">
                 <div class="formHeader">
@@ -109,7 +123,7 @@
                             {% endfor %}
                         
                         {% endfor %}
-                        <div class=".align-content-xl-center"
+                        <div class="align-content-xl-center"
                             style="padding-left: 20%; padding-right: 20%; padding-top: 2%;" align="center">
                             <input type="submit" value="S'inscrire" class="btn btn-sm btn-third btn-block">
                         </div>
@@ -119,26 +133,32 @@
             <div class="signIn">
                 <hr>
                 <p>Déjà un compte ? Alors Connectez-vous :)</p>
-                <div class=".align-content-xl-center" style="padding-left: 20%; padding-right: 20%; padding-top: 2%;"
+                <div class="align-content-xl-center" style="padding-left: 20%; padding-right: 20%; padding-top: 2%; padding: 3%;"
                     align="center">
                     <a href="/login" class="btn btn-sm btn-fourth btn-block">Se connecter</a>
                 </div>
             </div>
         </div>
-        <div style="" class="signUpRight"></div>
+        <div class="col-lg-5 col-sm-0 signUpRight"></div>
     </div>
-    <div class="footer" style="position: absolute; bottom: 0; min-width: 100%;">
-        <div class="social">
+    </div>
+    <div class="footer">
+        <div class="row" style="width: 100%;">
+        <div class="col-lg-6 social">
             <ul class="su">
                 <li><a href=""><i class="fa fa-facebook-square"></i></a></li>
                 <li><a href=""><i class="fa fa-twitter"></i></a></li>
                 <li><a href=""><i class="fa fa-instagram"></i></a></li>
             </ul>
         </div>
-        <div class="nc">
+        <div class="col-lg-6 nc">
             Contact Number: 00221773832393
         </div>
+        </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{% static 'bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'popper.min.js'%}"></script>
 </body>
 
 </html>

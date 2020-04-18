@@ -31,7 +31,7 @@
 
 <body>
     <div class="header">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light-1 fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <a class="navbar-brand" href="/"><img src="{% static 'img/logo.png'%}" alt="" style="height:40px;"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -98,81 +98,255 @@
                         <input type="text" name="" id="" class="form-control" placeholder="Que recherchez-vous?">
                     </div>
                     <div class="col-lg-3">
-                        <input type="button" value="Rechercher" class="btn btn-third btn-block">
+                        <input type="button" value="Rechercher" class="btn btn-fourth btn-block">
                     </div>
                 </div>
             </form>
         </div>
         <div class="categorie" align="center">
             <div class="row" align="center">
-                <div class="col-lg-4" align="center">
-                    <div class="cat" align="center">
-                        <div class="catImg" align="center">
-                            <img src="{% static 'img/home.png' %}" alt="">
+                <div class="col-lg-3" align="center">
+                    <div class="row cat">
+                        <div class="row">
+                        <div class="col-md-6">
+                            <div class="catImg" align="center">
+                                <div class="im">
+                                <img src="{% static 'img/home.png' %}" alt="">
+                                </div>
+                            </div>
                         </div>
-                        <h2 class="catTitle">Aide à domicile</h2>
-                        <p class="catSubTitle">
-                            Balaie, Machine à laver,...
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="cat">
-                        <div class="catImg">
-                            <img src="{% static 'img/house.png'%}" alt="">
+                        <div class="col-md-6">
+                            
+                                <h6 class="catTitle">Maison</h6>
                         </div>
-                        <h2 class="catTitle">Maison</h2>
-                        <p class="catSubTitle">
-                            Réparation, Bricolage...
-                        </p>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="cat">
-                        <div class="catImg">
-                            <img src="{% static 'img/plant.png'%}" alt="">
+                            <div class="row">
+                                <div class="col-md-6" style="color: rgba(255,255,255,0);">
+                                    TrocBi
+                                </div>
+                                <div class="col-md-6">
+                        <u class="catSub">
+                            <li>Vaissailles</li> 
+                            <li>machine à laver</li>
+                            <li>Linge de maison</li>
+                            <li>Décoration</li>
+                        </u>
                         </div>
-                        <h2 class="catTitle">Jardin et Exterieur</h2>
-                        <p class="catSubTitle">
-                            Hache, Découpage,...
-                        </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div class="col-lg-3" align="center">
+                        <div class="row cat">
+                            <div class="row">
+                            <div class="col-md-6">
+                                <div class="catImg" align="center">
+                                    <div class="im">
+                                    <img src="{% static 'img/home.png' %}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                
+                                    <h6 class="catTitle">Maison</h6>
+                            </div>
+                        </div>
+                                <div class="row">
+                                    <div class="col-md-6" style="color: rgba(255,255,255,0);">
+                                        TrocBi
+                                    </div>
+                                    <div class="col-md-6">
+                            <u class="catSub">
+                                <li>Vaissailles</li> 
+                                <li>machine à laver</li>
+                                <li>Linge de maison</li>
+                                <li>Décoration</li>
+                            </u>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3" align="center">
+                            <div class="row cat">
+                                <div class="row">
+                                <div class="col-md-6">
+                                    <div class="catImg" align="center">
+                                        <div class="im">
+                                        <img src="{% static 'img/home.png' %}" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    
+                                        <h6 class="catTitle">Maison</h6>
+                                </div>
+                            </div>
+                                    <div class="row">
+                                        <div class="col-md-6" style="color: rgba(255,255,255,0);">
+                                            TrocBi
+                                        </div>
+                                        <div class="col-md-6">
+                                <u class="catSub">
+                                    <li>Vaissailles</li> 
+                                    <li>machine à laver</li>
+                                    <li>Linge de maison</li>
+                                    <li>Décoration</li>
+                                </u>
+                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3" align="center">
+                                <div class="row cat">
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="catImg" align="center">
+                                            <div class="im">
+                                            <img src="{% static 'img/home.png' %}" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                            <h6 class="catTitle">Maison</h6>
+                                    </div>
+                                </div>
+                                        <div class="row">
+                                            <div class="col-md-6" style="color: rgba(255,255,255,0);">
+                                                TrocBi
+                                            </div>
+                                            <div class="col-md-6">
+                                    <u class="catSub">
+                                        <li>Vaissailles</li> 
+                                        <li>machine à laver</li>
+                                        <li>Linge de maison</li>
+                                        <li>Décoration</li>
+                                    </u>
+                                    </div>
+                                        </div>
+                                    </div>
+                                </div>
             </div>
-            <div class="row" style="margin-top: 5%;">
-                <div class="col-lg-4">
-                    <div class="cat">
-                        <div class="catImg">
-                            <img src="{% static 'img/delivery.png'%}" alt="">
+            <div class="row" align="center" style="margin-top: 5%;">
+                <div class="col-lg-3" align="center">
+                    <div class="row cat">
+                        <div class="row">
+                        <div class="col-md-6">
+                            <div class="catImg" align="center">
+                                <div class="im">
+                                <img src="{% static 'img/home.png' %}" alt="">
+                                </div>
+                            </div>
                         </div>
-                        <h2 class="catTitle">Transport</h2>
-                        <p class="catSubTitle">
-                            Roue, Voitures,...
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="cat">
-                        <div class="catImg">
-                            <img src="{% static 'img/tool.png'%}" alt="">
+                        <div class="col-md-6">
+                            
+                                <h6 class="catTitle">Maison</h6>
                         </div>
-                        <h2 class="catTitle">Matériel de Maison</h2>
-                        <p class="catSubTitle">
-                            Tournevis, chaise,...
-                        </p>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="cat">
-                        <div class="catImg">
-                            <img src="{% static 'img/monitor-2.png'%}" alt="">
+                            <div class="row">
+                                <div class="col-md-6" style="color: rgba(255,255,255,0);">
+                                    TrocBi
+                                </div>
+                                <div class="col-md-6">
+                        <u class="catSub">
+                            <li>Vaissailles</li> 
+                            <li>machine à laver</li>
+                            <li>Linge de maison</li>
+                            <li>Décoration</li>
+                        </u>
                         </div>
-                        <h2 class="catTitle">Multimédia</h2>
-                        <p class="catSubTitle">
-                            Ordinateur, Chargeur,...
-                        </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div class="col-lg-3" align="center">
+                        <div class="row cat">
+                            <div class="row">
+                            <div class="col-md-6">
+                                <div class="catImg" align="center">
+                                    <div class="im">
+                                    <img src="{% static 'img/home.png' %}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                
+                                    <h6 class="catTitle">Maison</h6>
+                            </div>
+                        </div>
+                                <div class="row">
+                                    <div class="col-md-6" style="color: rgba(255,255,255,0);">
+                                        TrocBi
+                                    </div>
+                                    <div class="col-md-6">
+                            <u class="catSub">
+                                <li>Vaissailles</li> 
+                                <li>machine à laver</li>
+                                <li>Linge de maison</li>
+                                <li>Décoration</li>
+                            </u>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3" align="center">
+                            <div class="row cat">
+                                <div class="row">
+                                <div class="col-md-6">
+                                    <div class="catImg" align="center">
+                                        <div class="im">
+                                        <img src="{% static 'img/home.png' %}" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    
+                                        <h6 class="catTitle">Maison</h6>
+                                </div>
+                            </div>
+                                    <div class="row">
+                                        <div class="col-md-6" style="color: rgba(255,255,255,0);">
+                                            TrocBi
+                                        </div>
+                                        <div class="col-md-6">
+                                <u class="catSub">
+                                    <li>Vaissailles</li> 
+                                    <li>machine à laver</li>
+                                    <li>Linge de maison</li>
+                                    <li>Décoration</li>
+                                </u>
+                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3" align="center">
+                                <div class="row cat">
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="catImg" align="center">
+                                            <div class="im">
+                                            <img src="{% static 'img/home.png' %}" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                            <h6 class="catTitle">Maison</h6>
+                                    </div>
+                                </div>
+                                        <div class="row">
+                                            <div class="col-md-6" style="color: rgba(255,255,255,0);">
+                                                TrocBi
+                                            </div>
+                                            <div class="col-md-6">
+                                    <u class="catSub">
+                                        <li>Vaissailles</li> 
+                                        <li>machine à laver</li>
+                                        <li>Linge de maison</li>
+                                        <li>Décoration</li>
+                                    </u>
+                                    </div>
+                                        </div>
+                                    </div>
+                                </div>
             </div>
             <div class="row" align="center"><div class="col-lg-4"></div><div class="col-lg-4" style="margin-top: 3%; padding-left: 5%; padding-right: 3%;"><a href="" class="btn btn-third btn-block">Voir Plus +</a></div></div>
         </div>
@@ -279,7 +453,7 @@
             </div>
         </form>
     </div>
-    <div class="footer">
+    <div class="footer black">
         <div class="row" style="width: 100%;">
             <div class="col-lg-6 social">
                 <ul class="su">

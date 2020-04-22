@@ -69,7 +69,7 @@
                         <label for="nameA">Nom de l'annoce</label>
                         <input type="text" name="nameA" id="nameA" class="form-control">
                     </div>
-                    <div class="col-lg-6">
+                    <!--<div class="col-lg-6">
                         <label for="nat">Nature</label>
                         <select name="nat" id="nat" onchange="newRanger1(this);" class="form-control">
                             <option value=""></option>
@@ -78,7 +78,7 @@
                             {% endfor %}
                             <option value="other">autre</option>
                         </select>
-                    </div>
+                    </div>-->
                 </div>
                 <!--<div class="ranger" id="NatRow">
                     <div class="colone">
@@ -91,13 +91,13 @@
                 </div>-->
                 <div class="row">
                     <div class="col-lg-6">
-                        <label for="catA">Catégorie</label>
-                        <select name="catA" id="catA" onchange="newRanger(this);" class="form-control">
+                        <label for="nat">Nature</label>
+                        <select name="nat" id="nat" onchange="newRanger1(this);" class="form-control">
                             <option value=""></option>
-                            {% for prop in sousFamille %}
-                            <option value="{{ prop.id }}">{{ prop.sous_famille}}</option>
+                            {% for prop in nat %}
+                            <option value="{{ prop.id }}">{{ prop.nature}}</option>
                             {% endfor %}
-                            <option value="other">Autre</option>
+                            <option value="other">autre</option>
                         </select>
                     </div>
                     <div class="col-lg-6">

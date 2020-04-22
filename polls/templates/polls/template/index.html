@@ -11,20 +11,21 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title>TrocBi</title>
     <style>
-        body{
+        body {
             margin-top: 0;
         }
 
-        input[type=submit]{
-            bottom: 0; 
+        input[type=submit] {
+            bottom: 0;
             position: absolute;
         }
 
-        @media screen and (max-width: 1000px){
-            input[type=submit]{
-            bottom: 0; 
-            position: relative;;
-        }
+        @media screen and (max-width: 1000px) {
+            input[type=submit] {
+                bottom: 0;
+                position: relative;
+                ;
+            }
         }
     </style>
 </head>
@@ -33,42 +34,46 @@
     <div class="header">
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <a class="navbar-brand" href="/"><img src="{% static 'img/logo.png'%}" alt="" style="height:40px;"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-          
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                  <a class="nav-link scrolle btn btn-primary" {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}>Déposer une annonce</a>
-                </li>
-                <li class="nav-item" style="border-right: #000 solid 1px;">
-                  <a class="nav-link" href="#search"><i class="fa fa-search" style="font-size: 20px; font-weight:lighter;"></i></a>
-                </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Mes favoris</a>
-                  </li>
-                <li class="nav-item dropdown dropleft">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="{% static 'img/user.png' %}" style="height:20px;">
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="profile">Mon profil</a>
-                    <a class="dropdown-item" href="logout">Deconnexion</a>
-                  </div>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                  <a class="nav-link btn btn-primary" href="login">Connexion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-secondary" href="signup">Inscription</a>
-                  </li>
-                  {% endif %}
-              </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link scrolle btn btn-primary" {% if user.is_authenticated %} href="/passerannonce"
+                            {% else %} href="/login" {% endif %}>Déposer une annonce</a>
+                    </li>
+                    <li class="nav-item" style="border-right: #000 solid 1px;">
+                        <a class="nav-link" href="#search"><i class="fa fa-search"
+                                style="font-size: 20px; font-weight:lighter;"></i></a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mes favoris</a>
+                    </li>
+                    <li class="nav-item dropdown dropleft">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{% static 'img/user.png' %}" style="height:20px;">
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="profile">Mon profil</a>
+                            <a class="dropdown-item" href="logout">Deconnexion</a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary" href="login">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-secondary" href="signup">Inscription</a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
-          </nav>
+        </nav>
         <div class="content">
             <div class="slogan">
                 <h1 class="slog">
@@ -79,7 +84,8 @@
                 </h1>
             </div>
             <div class="post">
-                <a {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %} class="btn btn-primary">Déposer une annonce</a>
+                <a {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}
+                    class="btn btn-primary">Déposer une annonce</a>
             </div>
         </div>
     </div>
@@ -105,250 +111,82 @@
         </div>
         <div class="categorie" align="center">
             <div class="row" align="center">
-                <div class="col-lg-3" align="center">
+                {% for p,n in sf %}
+                <div class="col-lg-3" align="center" onclick="linkToCat('{{ p.id }}')">
                     <div class="row cat">
                         <div class="row">
-                        <div class="col-md-6">
-                            <div class="catImg" align="center">
-                                <div class="im">
-                                <img src="{% static 'img/home.png' %}" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            
-                                <h6 class="catTitle">Maison</h6>
-                        </div>
-                    </div>
-                            <div class="row">
-                                <div class="col-md-6" style="color: rgba(255,255,255,0);">
-                                    TrocBi
-                                </div>
-                                <div class="col-md-6">
-                        <u class="catSub">
-                            <li>Vaissailles</li> 
-                            <li>machine à laver</li>
-                            <li>Linge de maison</li>
-                            <li>Décoration</li>
-                        </u>
-                        </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3" align="center">
-                        <div class="row cat">
-                            <div class="row">
                             <div class="col-md-6">
                                 <div class="catImg" align="center">
                                     <div class="im">
-                                    <img src="{% static 'img/home.png' %}" alt="">
+                                        <img src="{{p.image.url}}" alt="">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                
-                                    <h6 class="catTitle">Maison</h6>
+
+                                <h6 class="catTitle">{{p.sous_famille}}</h6>
                             </div>
                         </div>
-                                <div class="row">
-                                    <div class="col-md-6" style="color: rgba(255,255,255,0);">
-                                        TrocBi
-                                    </div>
-                                    <div class="col-md-6">
-                            <u class="catSub">
-                                <li>Vaissailles</li> 
-                                <li>machine à laver</li>
-                                <li>Linge de maison</li>
-                                <li>Décoration</li>
-                            </u>
+                        <div class="row">
+                            <div class="col-md-6" style="color: rgba(255,255,255,0);">
+                                TrocBi
                             </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3" align="center">
-                            <div class="row cat">
-                                <div class="row">
-                                <div class="col-md-6">
-                                    <div class="catImg" align="center">
-                                        <div class="im">
-                                        <img src="{% static 'img/home.png' %}" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
+                            <div class="col-md-6">
+                                <ul class="catSub">
+                                    {% for no in n %}
                                     
-                                        <h6 class="catTitle">Maison</h6>
-                                </div>
+                                    <li>{{no.nature}}</li>
+
+                                    {% endfor %}
+                                    
+
+                                </ul>
                             </div>
-                                    <div class="row">
-                                        <div class="col-md-6" style="color: rgba(255,255,255,0);">
-                                            TrocBi
-                                        </div>
-                                        <div class="col-md-6">
-                                <u class="catSub">
-                                    <li>Vaissailles</li> 
-                                    <li>machine à laver</li>
-                                    <li>Linge de maison</li>
-                                    <li>Décoration</li>
-                                </u>
-                                </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3" align="center">
-                                <div class="row cat">
-                                    <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="catImg" align="center">
-                                            <div class="im">
-                                            <img src="{% static 'img/home.png' %}" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        
-                                            <h6 class="catTitle">Maison</h6>
-                                    </div>
-                                </div>
-                                        <div class="row">
-                                            <div class="col-md-6" style="color: rgba(255,255,255,0);">
-                                                TrocBi
-                                            </div>
-                                            <div class="col-md-6">
-                                    <u class="catSub">
-                                        <li>Vaissailles</li> 
-                                        <li>machine à laver</li>
-                                        <li>Linge de maison</li>
-                                        <li>Décoration</li>
-                                    </u>
-                                    </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
             <div class="row" align="center" style="margin-top: 5%;">
-                <div class="col-lg-3" align="center">
+                {% for p,n in sf1 %}
+                <div class="col-lg-3" align="center" onclick="linkToCat('{{ p.id }}')">
                     <div class="row cat">
                         <div class="row">
-                        <div class="col-md-6">
-                            <div class="catImg" align="center">
-                                <div class="im">
-                                <img src="{% static 'img/home.png' %}" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            
-                                <h6 class="catTitle">Maison</h6>
-                        </div>
-                    </div>
-                            <div class="row">
-                                <div class="col-md-6" style="color: rgba(255,255,255,0);">
-                                    TrocBi
-                                </div>
-                                <div class="col-md-6">
-                        <u class="catSub">
-                            <li>Vaissailles</li> 
-                            <li>machine à laver</li>
-                            <li>Linge de maison</li>
-                            <li>Décoration</li>
-                        </u>
-                        </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3" align="center">
-                        <div class="row cat">
-                            <div class="row">
                             <div class="col-md-6">
                                 <div class="catImg" align="center">
                                     <div class="im">
-                                    <img src="{% static 'img/home.png' %}" alt="">
+                                        <img src="{{p.image.url}}" alt="">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                
-                                    <h6 class="catTitle">Maison</h6>
+
+                                <h6 class="catTitle">{{p.sous_famille}}</h6>
                             </div>
                         </div>
-                                <div class="row">
-                                    <div class="col-md-6" style="color: rgba(255,255,255,0);">
-                                        TrocBi
-                                    </div>
-                                    <div class="col-md-6">
-                            <u class="catSub">
-                                <li>Vaissailles</li> 
-                                <li>machine à laver</li>
-                                <li>Linge de maison</li>
-                                <li>Décoration</li>
-                            </u>
+                        <div class="row">
+                            <div class="col-md-6" style="color: rgba(255,255,255,0);">
+                                TrocBi
                             </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3" align="center">
-                            <div class="row cat">
-                                <div class="row">
-                                <div class="col-md-6">
-                                    <div class="catImg" align="center">
-                                        <div class="im">
-                                        <img src="{% static 'img/home.png' %}" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
+                            <div class="col-md-6">
+                                <ul class="catSub">
+                                    {% for no in n %}
+                                    <li>{{no.nature}}</li>
+                                    {% endfor %}
                                     
-                                        <h6 class="catTitle">Maison</h6>
-                                </div>
+
+                                </ul>
                             </div>
-                                    <div class="row">
-                                        <div class="col-md-6" style="color: rgba(255,255,255,0);">
-                                            TrocBi
-                                        </div>
-                                        <div class="col-md-6">
-                                <u class="catSub">
-                                    <li>Vaissailles</li> 
-                                    <li>machine à laver</li>
-                                    <li>Linge de maison</li>
-                                    <li>Décoration</li>
-                                </u>
-                                </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3" align="center">
-                                <div class="row cat">
-                                    <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="catImg" align="center">
-                                            <div class="im">
-                                            <img src="{% static 'img/home.png' %}" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        
-                                            <h6 class="catTitle">Maison</h6>
-                                    </div>
-                                </div>
-                                        <div class="row">
-                                            <div class="col-md-6" style="color: rgba(255,255,255,0);">
-                                                TrocBi
-                                            </div>
-                                            <div class="col-md-6">
-                                    <u class="catSub">
-                                        <li>Vaissailles</li> 
-                                        <li>machine à laver</li>
-                                        <li>Linge de maison</li>
-                                        <li>Décoration</li>
-                                    </u>
-                                    </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            <div class="row" align="center"><div class="col-lg-4"></div><div class="col-lg-4" style="margin-top: 3%; padding-left: 5%; padding-right: 3%;"><a href="" class="btn btn-third btn-block">Voir Plus +</a></div></div>
+            <div class="row" align="center">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4" style="margin-top: 3%; padding-left: 5%; padding-right: 3%;"><a href=""
+                        class="btn btn-third btn-block">Voir Plus +</a></div>
+            </div>
         </div>
     </div>
     <div class="titleRecent">
@@ -396,7 +234,11 @@
         {% else %}
         <p>No polls are available.</p>
         {% endif %}
-        <div class="row" align="center"><div class="col-lg-4"></div><div class="col-lg-4" style="margin-top: 3%; padding-left: 5%; padding-right: 3%;"><a href="/list" class="btn btn-third btn-block">Voir Plus +</a></div></div>
+        <div class="row" align="center">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4" style="margin-top: 3%; padding-left: 5%; padding-right: 3%;"><a href="/list"
+                    class="btn btn-third btn-block">Voir Plus +</a></div>
+        </div>
     </div>
     <div class="newsletter">
         <div class="textletter">
@@ -408,8 +250,8 @@
                 <div style="display: flex;"><input type="text" name="" id=""
                         style="width: 80%; border-top-right-radius: 0px; border-bottom-right-radius: 0px; background-color: rgba(255,255,255,.16); border: 1px #000 solid;"
                         class="form-control"><button type="submit"
-                        style="width: 20%; border-top-left-radius: 0px; border-bottom-left-radius: 0px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: #000 solid 1px;" value=""
-                        class="btn-big btn-third"><i class="material-icons">send</i></button></div>
+                        style="width: 20%; border-top-left-radius: 0px; border-bottom-left-radius: 0px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: #000 solid 1px;"
+                        value="" class="btn-big btn-third"><i class="material-icons">send</i></button></div>
             </form>
             <p class="textsuccess"><span>&#10004;</span>Votre email a été sauvegardé avec succès , Merci et à très
                 bientôt</p>
@@ -433,7 +275,7 @@
                     <input type="text" name="" id="lname" placeholder="Sall" class="form-control">
                 </div>
             </div>
-            <div class="row"  style="margin-top: 2%;">
+            <div class="row" style="margin-top: 2%;">
                 <div class="col-lg-6">
                     <label for="message">Message</label>
                     <textarea name="" id="mesage" cols="30" placeholder="Votre message ici" rows="10"
@@ -442,9 +284,9 @@
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col">
-                        <label for="tel">Numéro de téléphone</label>
-                        <input type="tel" name="" id="tel" placeholder="778239231" class="form-control">
-                    </div>
+                            <label for="tel">Numéro de téléphone</label>
+                            <input type="tel" name="" id="tel" placeholder="778239231" class="form-control">
+                        </div>
                     </div>
                     <div class="row">
                         <input type="submit" value="Envoyer" class="btn btn-third">
@@ -465,7 +307,7 @@
             <div class="col-lg-6 nc">
                 Contact Number: 00221773832393
             </div>
-            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="{% static 'bootstrap.bundle.min.js'%}"></script>
@@ -508,30 +350,34 @@
             window.location.href = "/" + id + "/";
         }
 
+        function linkToCat(cat) {
+            window.location.href = "/cat/"+ cat;
+        }
+
         function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
 
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
 
-var url = window.location.pathname;
-var id = url.substring(url.lastIndexOf('/') + 1);
+        var url = window.location.pathname;
+        var id = url.substring(url.lastIndexOf('/') + 1);
 
-if(id == '#search'){
-    document.getElementById('search').style.marginTop == '10%';
-}
+        if (id == '#search') {
+            document.getElementById('search').style.marginTop == '10%';
+        }
     </script>
 </body>
 

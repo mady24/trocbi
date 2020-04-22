@@ -12,7 +12,7 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title>TrocBi</title>
     <style>
-        .MP{
+        .MP {
             margin-left: 10%;
             margin-right: 10%;
             margin-top: 5%;
@@ -20,30 +20,30 @@
         }
 
         .MP .inf {
-            border: 1px solid rgba(112,112,112,.16);
-            box-shadow: 1px 2px rgba(0,0,0,0.16);
+            border: 1px solid rgba(112, 112, 112, .16);
+            box-shadow: 1px 2px rgba(0, 0, 0, 0.16);
             padding: 3%;
             margin-left: 5%;
             margin-right: 5%;
         }
 
         .MP .cmp {
-            border: 1px solid rgba(112,112,112,.16);
-            box-shadow: 1px 2px rgba(0,0,0,0.16);
+            border: 1px solid rgba(112, 112, 112, .16);
+            box-shadow: 1px 2px rgba(0, 0, 0, 0.16);
             padding: 3%;
             margin-left: 5%;
             margin-right: 5%;
             margin-top: 3%;
         }
 
-        .but{
+        .but {
             position: absolute;
             bottom: 0%;
             width: 90%;
         }
 
-        .cen{
-            
+        .cen {
+
             margin-left: 25%;
             top: 0;
         }
@@ -98,53 +98,53 @@
         <div class="inf">
             <fieldset>
                 <legend>Informations</legend>
-                <form method="post"  enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="form-group but">
-                            {{ user_form.last_name | bootstrap }}
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group but">
+                                {{ user_form.last_name | bootstrap }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group but">
-                            {{ user_form.first_name | bootstrap }}
+                        <div class="col-lg-4">
+                            <div class="form-group but">
+                                {{ user_form.first_name | bootstrap }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4" align="center">
-                        <div class="row cen">
-                        <p style="text-align: center; width: 50%;">Photo de profil</p>
-                        </div>
-                        <div class="row cen">
-                            {% if profile.avatar.url == '' %}
+                        <div class="col-lg-4" align="center">
+                            <div class="row cen">
+                                <p style="text-align: center; width: 50%;">Photo de profil</p>
+                            </div>
+                            <div class="row cen">
+                                {% if profile.avatar.url == '' %}
                                 <img id="pp" src="{% static 'img/user.png' %}" alt="" style="width: 50%;">
-                            {% else %}
-                            <img id="pp" src="{% static 'img/user.png' %}" alt="" style="width: 50%;">
-                            {% endif %}
-                        </div>
-                        {{ avatar_form.avatar }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            {{ user_form.username | bootstrap }}
+                                {% else %}
+                                <img id="pp" src="{% static 'img/user.png' %}" alt="" style="width: 50%;">
+                                {% endif %}
+                            </div>
+                            {{ avatar_form.avatar }}
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            {{ profile_form.address | bootstrap }}
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                {{ user_form.username | bootstrap }}
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                {{ profile_form.address | bootstrap }}
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                {{ profile_form.tel | bootstrap }}
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            {{ profile_form.tel | bootstrap }}
-                        </div>
+                    <div class="row">
+                        <input type="submit" class="btn btn-third" value="Enregistrer">
                     </div>
-                </div>
-                <div class="row">
-                    <input type="submit" class="btn btn-third" value="Enregistrer">
-                </div>
                 </form>
             </fieldset>
         </div>

@@ -25,7 +25,7 @@ SECRET_KEY = 'vhi+$xd$u#&n&8!v)e)bw+q^8x&vs!t5ky%nuud8(1t4=@xiqh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []#'samatroc.herokuapp.com']
+ALLOWED_HOSTS = ['sentroc.herokuapp.com']
 
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, 'static'),

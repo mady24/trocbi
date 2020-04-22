@@ -81,6 +81,10 @@
         {% if prop %}
 
         {% for prop in prop %}
+        {% for p in p %}
+        {% for p in p %}
+        {% if prop.id|slugify == p|slugify %}
+        
         <div class="row recentItem" onclick="linkTo('{{ prop.id }}')">
             <div class="col-lg-4 recentImg">
                 {% if prop.image1.url != null %}
@@ -115,6 +119,9 @@
                 </h6>
             </div>
         </div>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
         {% endfor %}
         {% else %}
         <p>No polls are available.</p>

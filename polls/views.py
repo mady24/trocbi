@@ -33,11 +33,56 @@ ETAT_ACTUEL = (
 
 def index(request):
     sousFamille = SousFamille.objects.order_by('sous_famille')
+    sf = SousFamille.objects.order_by('sous_famille')[1:5]
+    sf1 = SousFamille.objects.order_by('sous_famille')[5:9]
+    p = []
+    for n in sf:
+        prop = NatureBien.objects.filter(famille=n)
+        #if(len(prop)>0):
+        print(prop)
+        p.append(prop)
+    
+    print(p)
+    p1 = []
+    for n in sf1:
+        prop = NatureBien.objects.filter(famille=n)
+        #if(len(prop)>0):
+        print(prop)
+        p1.append(prop)
+    
+    print(p1)
     template = loader.get_template('polls/template/index.html')
     prop = PostProp.objects.order_by("-pub_date")
+    zip1 = zip(sf,p)
+    zip2 = zip(sf1,p1)
     context = {
         'sousFamille': sousFamille,
         'prop': prop, 
+        'sf': zip1,
+        'sf1': zip2,
+    }
+    return HttpResponse(template.render(context, request))
+
+def cat(request, cat_id):
+    sousFamille = SousFamille.objects.order_by('sous_famille')
+    sf = SousFamille.objects.get(pk=cat_id)
+    print(sf)
+    nature = NatureBien.objects.filter(famille=sf)
+    print(nature)
+    template = loader.get_template('polls/template/listcat.html')
+    p = []
+    for n in nature:
+        prop = PostProp.objects.filter(nature=n)
+        #if(len(prop)>0):
+        print(prop)
+        p.append(prop)
+    
+    print(p)
+    prop = PostProp.objects.order_by('id')
+    context = {
+        'sousFamille': sousFamille,
+        'prop': prop,
+        'p': p,
     }
     return HttpResponse(template.render(context, request))
 
@@ -69,7 +114,7 @@ def passerAjouter(request):
     if(request.POST['type'] == 'demande'):
         name = request.POST['nameA']
         nn = request.POST['nat']
-        nf = request.POST['catA']
+
         typeA = 'demande'
         du = request.POST['du']
         eac = request.POST['eac']
@@ -79,7 +124,6 @@ def passerAjouter(request):
         propIns = PostProp(
             name=name,
             nature=NatureBien.objects.get(pk=nn),
-            sous_famille=SousFamille.objects.get(pk=nf),
             typeProp=typeA,
             durée_util=du,
             etat_actuel=eac,
@@ -91,7 +135,6 @@ def passerAjouter(request):
     if(request.POST['type'] == 'offre'):
         name = request.POST['nameA']
         nn = request.POST['nat']
-        nf = request.POST['catA']
         typeA = 'offre'
         du = request.POST['du']
         eac = request.POST['eac']
@@ -106,7 +149,6 @@ def passerAjouter(request):
         propIns = PostProp(
             name=name,
             nature=NatureBien.objects.get(pk=nn),
-            sous_famille=SousFamille.objects.get(pk=nf),
             typeProp=typeA,
             durée_util=du,
             etat_achat=ea,

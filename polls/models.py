@@ -24,22 +24,28 @@ TYPE = (
     ("demande","demande")
 )
 
-
-class NatureBien(models.Model):
-    nature = models.CharField(max_length=200)
-    def __str__(self):
-        return self.nature
-
 class SousFamille(models.Model):
     sous_famille = models.CharField(max_length=200)
     dexcription = models.CharField(max_length=1000, null=True)
+    image = models.ImageField(blank=True, null=True)
     def __str__(self):
         return self.sous_famille
+    
+
+class NatureBien(models.Model):
+    nature = models.CharField(max_length=200)
+    famille = models.ForeignKey(SousFamille, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.nature
+    def __int__(self):
+        return self.famille
+
+
 
 class PostProp(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
     nature = models.ForeignKey(NatureBien, on_delete=models.CASCADE)
-    sous_famille = models.ForeignKey(SousFamille, on_delete=models.CASCADE)
     description = models.CharField(max_length=1000)
     durée_util = models.IntegerField(max_length=10, null=True)
     prix_achat = models.FloatField(max_length=10)
@@ -52,7 +58,7 @@ class PostProp(models.Model):
     image2 = models.ImageField(blank=True, null=True)
     image3 = models.ImageField(blank=True, null=True)
     def __str__(self):
-        return self.name
+        return '%d'%(self.id)
 
 class PostSearch(models.Model):
     name = models.CharField(max_length=200)

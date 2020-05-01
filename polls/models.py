@@ -82,8 +82,8 @@ class Profile(models.Model):
 class Avatar(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to='',blank=True,null=True)
-    def __int__(self):
-        return self.user.id
+    def __str__(self):
+        return '%s'%(self.user)
 
 
 @receiver(post_save, sender=User)

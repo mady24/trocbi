@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300&display=swap');
 *{
     margin: 0;
     padding: 0;
+    font-family: 'Comic Neue', cursive sans-serif;
 }
 
 body{
     margin-top: 70px;
-    font-family: 'Roboto', sans-serif;
+    
 }
 
 h1,h2,h3,h4,H5,h6{
@@ -46,7 +48,7 @@ small{
 .header{
     top: 0;
     height: 100vh;
-    background-image: url('img/christina-wocintechchat-com-3sY92eKV6-Y-unsplash.png');
+    background-image: url('img/close-up-photo-of-smiling-girl-covering-mouth-1445465.png');
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
@@ -361,10 +363,10 @@ small{
     width: 80%;
     margin-left: 0%;
     height: 20%;
-    background-color: #F2BB03;
-    margin-top: -5vh;
-    padding-top: 2%;
-    padding-bottom: 2%;
+    background-color: #F2BE8D;
+    margin-top: -7%;
+    padding-top: 5%;
+    padding-bottom: 5% ;
     box-shadow: 1px 2px rgba(0,0,0,0.16);
     border-radius: 5px;
 }
@@ -380,19 +382,8 @@ small{
     margin-right: 5%;
 }
 
-.categorie .ranger{
-    width: 100%;
-    margin-top: 5vh;
-    display: flex;
-}
-
-.categorie .ranger .colone5{
-    width: 33.33%;
-}
-
  .cat{
     width: 80%;
-    height: 200px;
     overflow: hidden;
     margin-left: 5%;
     padding-top: .8vh;
@@ -407,14 +398,14 @@ small{
     border-radius: 50%;
     margin-left: 5px;
     margin-top: 5px;
-    height: 80px;
-    width: 80px;
+    height: 150px;
+    width: 150px;
     padding: 15px;
 }
 
 .catImg .im{
-        max-width: 50px;
-        max-height: 50px;
+        max-width: 80%;
+        max-height: 80%;
 }
 
 .catImg .im img{
@@ -426,13 +417,13 @@ small{
 }
 
 .catTitle{
-    text-align: center;
+    
+    float: left;
     margin-top: 30px;
 }
 
-.catTitle h6{
-    display: block;
-        margin: 0 auto;
+.catTitle h3{
+    text-align: center;
     
 }
 
@@ -457,14 +448,119 @@ small{
   }
 
 .titleRecent{
-    background-color: #F2BD02;
-    padding-top: 5vh;
-    padding-bottom: 5vh;
-    margin-top: 5vh;
+    background-color: #FFFFFF;
+    max-height: 10%;
+    margin-top: -5%;
+}
+.titleRecent img{
+    transform: translate(60%,70%);
+    height: 300px;
+}
+
+@media screen and (max-width: 1366px){
+    .titleRecent img{
+        transform: translate(100%,70%);
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 1440px){
+    .titleRecent img{
+        transform: translate(100%,70%);
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 1024px){
+    .titleRecent img{
+        transform: translate(80%,70%);
+        height: 220px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .titleRecent img{
+       display: none;
+    }
+    .titleRecent{
+        background-color: #FFFFFF;
+        max-height: 10%;
+        margin-top: 5%;
+    }
+}
+
+.titleRecent .heading{
+    background-color: #F2545B;
+    padding-top: 2.5%;
+    padding-bottom: 5%;
     box-shadow: 1px 2px rgba(0,0,0,0.16);
 }
 
-.titleRecent h1{
+.titleRecent .heading h1{
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.titleRecent .heading h4{
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.titleRecents{
+    background-color: #FFFFFF;
+    max-height: 10%;
+    margin-top: 5%;
+}
+.titleRecents img{
+    transform: translate(350%, -80%);
+    height: 300px;
+}
+
+@media screen and (max-width: 1440px){
+    .titleRecents img{
+        transform: translate(380%,-80%);
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 1366px){
+    .titleRecents img{
+        transform: translate(400%,-80%);
+        height: 220px;
+    }
+}
+
+@media screen and (max-width: 1024px){
+    .titleRecents img{
+        transform: translate(320%,-80%);
+        height: 220px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .titleRecents img{
+       display: none;
+    }
+    .titleRecents{
+        background-color: #FFFFFF;
+        max-height: 10%;
+        margin-top: 5%;
+    }
+}
+
+.titleRecents .headings{
+    background-color: #F2BE8D;
+    padding-top: 2.5%;
+    padding-bottom: 5%;
+    box-shadow: 1px 2px rgba(0,0,0,0.16);
+}
+
+.titleRecents .headings h1{
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.titleRecents .headings h4{
     text-align: center;
     color: #FFFFFF;
 }
@@ -607,21 +703,20 @@ small{
 }
 
 .newsletter{
-    margin-top: 10vh;
-    height: 40vh;
+    margin-top: 5%;
     background-color: #000;
-    
     color: #FFFFFF;
-    
     padding-top: 5%;
-    display: flex;
-    overflow: hidden;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .newsletter .textletter{
-    width: 50%;
-    margin-left: 10%;
-
+   
+    margin-right: 10%;
+    background-image: url('img/union3.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .newsletter .textletter .letterTitle{
@@ -1395,12 +1490,42 @@ margin-top: 3%;
     background-color:#171717;
     border-color:#0B0B0B
 }
-.btn-tfourth:not(:disabled):not(.disabled).active,.btn-fourth:not(:disabled):not(.disabled):active,.show>.btn-fourth.dropdown-toggle{
+.btn-fourth:not(:disabled):not(.disabled).active,.btn-fourth:not(:disabled):not(.disabled):active,.show>.btn-fourth.dropdown-toggle{
     color:#FFF;
     background-color:#000000;
     border-color: #0B0B0B
 }
 .btn-fourth:not(:disabled):not(.disabled).active:focus,.btn-fourth:not(:disabled):not(.disabled):active:focus,.show>.btn-fourth.dropdown-toggle:focus{
+    box-shadow:0 0 0 .2rem rgba(114,87,1,.5)
+}
+
+.btn-fith{
+    color:#000;
+    background-color:#F2BE8D;
+    border-color:#F2BE8D;
+}
+.btn-fith:hover{
+    color:#000;
+    background-color:#F2BE8D;
+    border-color:#1B1B1B
+}
+.btn-fith.focus,.btn-fith:focus{
+    color:#000;
+    background-color:#171717;
+    border-color:#1B1B1B;
+    box-shadow:0 0 0 .2rem rgba(38,143,255,.5)
+}
+.btn-fith.disabled,.btn-fith:disabled{
+    color:#000;
+    background-color:#171717;
+    border-color:#0B0B0B
+}
+.btn-fith:not(:disabled):not(.disabled).active,.btn-fith:not(:disabled):not(.disabled):active,.show>.btn-fith.dropdown-toggle{
+    color:#000;
+    background-color:#000000;
+    border-color: #0B0B0B
+}
+.btn-fith:not(:disabled):not(.disabled).active:focus,.btn-fith:not(:disabled):not(.disabled):active:focus,.show>.btn-fith.dropdown-toggle:focus{
     box-shadow:0 0 0 .2rem rgba(114,87,1,.5)
 }
 

@@ -33,8 +33,9 @@ ETAT_ACTUEL = (
 
 def index(request):
     sousFamille = SousFamille.objects.order_by('sous_famille')
-    sf = SousFamille.objects.order_by('sous_famille')[1:5]
-    sf1 = SousFamille.objects.order_by('sous_famille')[5:9]
+    sf = SousFamille.objects.order_by('sous_famille')[0:3]
+    sf1 = SousFamille.objects.order_by('sous_famille')[3:6]
+    sf2 = SousFamille.objects.order_by('sous_famille')[6:9]
     p = []
     for n in sf:
         prop = NatureBien.objects.filter(famille=n)
@@ -51,15 +52,25 @@ def index(request):
         p1.append(prop)
     
     print(p1)
+    p2 = []
+    for n in sf2:
+        prop = NatureBien.objects.filter(famille=n)
+        #if(len(prop)>0):
+        print(prop)
+        p2.append(prop)
+    
+    print(p2)
     template = loader.get_template('polls/template/index.html')
     prop = PostProp.objects.order_by("-pub_date")
     zip1 = zip(sf,p)
     zip2 = zip(sf1,p1)
+    zip3 = zip(sf2,p2)
     context = {
         'sousFamille': sousFamille,
         'prop': prop, 
         'sf': zip1,
         'sf1': zip2,
+        'sf2': zip3
     }
     return HttpResponse(template.render(context, request))
 

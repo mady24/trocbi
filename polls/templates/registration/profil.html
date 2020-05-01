@@ -119,7 +119,8 @@
                                 {% if profile.avatar.url == '' %}
                                 <img id="pp" src="{% static 'img/user.png' %}" alt="" style="width: 50%;">
                                 {% else %}
-                                <img id="pp" src="{% static 'img/user.png' %}" alt="" style="width: 50%;">
+                                <img id="pp" src="{{profile.avatar.url}}" alt="" style="width: 50%;">
+                                <a href="{{profile.avatar.url}}">test</a>
                                 {% endif %}
                             </div>
                             {{ avatar_form.avatar }}

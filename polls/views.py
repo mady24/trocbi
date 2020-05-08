@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect, JsonResponse
+from django.template.loader import render_to_string
 from django.template import loader
 from django.shortcuts import render
 from django.urls import reverse
@@ -9,6 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from django.core.paginator import Paginator
 
 from .models import PostProp
 from .models import SousFamille
@@ -32,6 +34,22 @@ ETAT_ACTUEL = (
 )
 
 def index(request):
+    context = {}
+    url_parameter = request.GET.get("q")
+
+    if url_parameter:
+        post = PostProp.objects.filter(name__icontains=url_parameter)
+    else:
+        post = []
+    context["post"] = post
+    if request.is_ajax():
+        html = render_to_string(
+            template_name='polls/template/result.html',
+            context={'post':post}
+        )
+
+        data_dict = {"html_from_view": html}
+
     sousFamille = SousFamille.objects.order_by('sous_famille')
     sf = SousFamille.objects.order_by('sous_famille')[0:3]
     sf1 = SousFamille.objects.order_by('sous_famille')[3:6]
@@ -61,11 +79,11 @@ def index(request):
     
     print(p2)
     template = loader.get_template('polls/template/index.html')
-    prop = PostProp.objects.order_by("-pub_date")
+    prop = PostProp.objects.order_by("-pub_date")[:3]
     zip1 = zip(sf,p)
     zip2 = zip(sf1,p1)
     zip3 = zip(sf2,p2)
-    context = {
+    context = { 
         'sousFamille': sousFamille,
         'prop': prop, 
         'sf': zip1,
@@ -74,7 +92,60 @@ def index(request):
     }
     return HttpResponse(template.render(context, request))
 
+def search(request):
+    sousFamille = SousFamille.objects.order_by('sous_famille')
+    ctx = {}
+    ctx['sousFamille'] = sousFamille
+    url_parameter = request.GET.get("q")
+
+    if url_parameter:
+        post = PostProp.objects.filter(name__icontains=url_parameter)
+    else:
+        post = []
+    ctx["post"] = post
+    if request.is_ajax():
+        html = render_to_string(
+            template_name='polls/template/result.html',
+            context={'post':post}
+        )
+
+        data_dict = {"html_from_view": html}
+
+        return JsonResponse(data=data_dict, safe=False)
+    print(request.POST)
+    cat = request.POST['categorie']
+    searched = request.POST['searched']
+    sf = SousFamille.objects.get(sous_famille__icontains=cat)
+    typ = NatureBien.objects.filter(famille=sf)
+    prop = []
+    #prop = PostProp.objects.filter(name__icontains=searched)
+    for t in typ:
+        
+        pro = PostProp.objects.filter(name__icontains=searched,nature=t)
+        print(pro)
+        prop.append(pro)
+    print(prop)
+    ctx['prop'] = prop
+    return render(request, 'polls/template/search.html', context=ctx)
+
 def cat(request, cat_id):
+    context = {}
+    url_parameter = request.GET.get("q")
+
+    if url_parameter:
+        post = PostProp.objects.filter(name__icontains=url_parameter)
+    else:
+        post = []
+    context["post"] = post
+    if request.is_ajax():
+        html = render_to_string(
+            template_name='polls/template/result.html',
+            context={'post':post}
+        )
+
+        data_dict = {"html_from_view": html}
+
+    page = request.GET.get('page', 1)
     sousFamille = SousFamille.objects.order_by('sous_famille')
     sf = SousFamille.objects.get(pk=cat_id)
     print(sf)
@@ -90,6 +161,8 @@ def cat(request, cat_id):
     
     print(p)
     prop = PostProp.objects.order_by('id')
+    pag = Paginator(prop, 2)
+    prop = pag.page(page)
     context = {
         'sousFamille': sousFamille,
         'prop': prop,
@@ -98,9 +171,28 @@ def cat(request, cat_id):
     return HttpResponse(template.render(context, request))
 
 def list(request):
+    context = {}
+    url_parameter = request.GET.get("q")
+
+    if url_parameter:
+        post = PostProp.objects.filter(name__icontains=url_parameter)
+    else:
+        post = []
+    context["post"] = post
+    if request.is_ajax():
+        html = render_to_string(
+            template_name='polls/template/result.html',
+            context={'post':post}
+        )
+
+        data_dict = {"html_from_view": html}
+
+    page = request.GET.get('page', 1)
     sousFamille = SousFamille.objects.order_by('sous_famille')
     template = loader.get_template('polls/template/list.html')
     prop = PostProp.objects.order_by("-pub_date")
+    pag = Paginator(prop, 2)
+    prop = pag.page(page)
     context = {
         'sousFamille': sousFamille,
         'prop': prop, 
@@ -108,12 +200,30 @@ def list(request):
     return HttpResponse(template.render(context, request))
 
 def detail(request, postProp_id):
+    context = {}
+    url_parameter = request.GET.get("q")
+
+    if url_parameter:
+        post = PostProp.objects.filter(name__icontains=url_parameter)
+    else:
+        post = []
+    context["post"] = post
+    if request.is_ajax():
+        html = render_to_string(
+            template_name='polls/template/result.html',
+            context={'post':post}
+        )
+
+        data_dict = {"html_from_view": html}
     try:
         sousFamille = SousFamille.objects.order_by('sous_famille')
-        post = PostProp.objects.get(pk=postProp_id)
+        posts = PostProp.objects.get(pk=postProp_id)
+        usr = User.objects.get(pk=posts.user_id)
+        oth = PostProp.objects.filter(user_id=posts.user_id).exclude(pk=postProp_id).order_by('-pub_date')[:4]
     except PostProp.DoesNotExist:
         raise Http404("Question does not exist")
-    return render(request, 'polls/template/detail.html', {'post': post,'sousFamille': sousFamille})
+    context = {'posts': posts,'sousFamille': sousFamille, 'usr': usr, 'oth': oth}
+    return render(request, 'polls/template/detail.html',context=context )
 
 def passer(request):
     sousFamille = SousFamille.objects.order_by('sous_famille')
@@ -125,7 +235,7 @@ def passerAjouter(request):
     if(request.POST['type'] == 'demande'):
         name = request.POST['nameA']
         nn = request.POST['nat']
-
+        l_des = request.POST['l_des']
         typeA = 'demande'
         du = request.POST['du']
         eac = request.POST['eac']
@@ -136,17 +246,20 @@ def passerAjouter(request):
             name=name,
             nature=NatureBien.objects.get(pk=nn),
             typeProp=typeA,
+            l_descrip=l_des,
             durée_util=du,
             etat_actuel=eac,
             prix_achat=prix,
             description=desc,
-            pub_date = timezone.now()
+            pub_date = timezone.now(),
+            user = request.user
         )
         propIns.save()
     if(request.POST['type'] == 'offre'):
         name = request.POST['nameA']
         nn = request.POST['nat']
         typeA = 'offre'
+        l_des = request.POST['l_des']
         du = request.POST['du']
         eac = request.POST['eac']
         prix = request.POST['prix']
@@ -161,6 +274,7 @@ def passerAjouter(request):
             name=name,
             nature=NatureBien.objects.get(pk=nn),
             typeProp=typeA,
+            l_descrip=l_des,
             durée_util=du,
             etat_achat=ea,
             etat_actuel=eac,
@@ -169,9 +283,10 @@ def passerAjouter(request):
             pub_date=timezone.now(),
             image1=img1,
             image2=img2,
-            image3=img3
+            image3=img3,
+            user = request.user
         )
-        propIns.save()
+        propIns.saveDemande()
     return HttpResponseRedirect(reverse('index'))
 
 def loginform(request):
@@ -193,6 +308,22 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('index'))
 
 def signup(request):
+    context = {}
+    url_parameter = request.GET.get("q")
+
+    if url_parameter:
+        post = PostProp.objects.filter(name__icontains=url_parameter)
+    else:
+        post = []
+    context["post"] = post
+    if request.is_ajax():
+        html = render_to_string(
+            template_name='polls/template/result.html',
+            context={'post':post}
+        )
+
+        data_dict = {"html_from_view": html}
+    sousFamille = SousFamille.objects.order_by('sous_famille')
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -204,17 +335,17 @@ def signup(request):
             return redirect('index')
     else:
         form = SignUpForm()
-    return render(request, 'registration/signup.html', {'form': form})
+    context = {'form': form, 'sousFamille': sousFamille}
+    return render(request, 'registration/signup.html', context=context)
 
 @login_required
 @transaction.atomic
 def profile(request):
-    profile = Avatar.objects.filter(user=request.user)
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
-        avatar_form = AvatarForm(request.FILES['avatar'], instance=request.user.avatar)
-        if user_form.is_valid() and profile_form.is_valid():
+        avatar_form = AvatarForm(request.POST, request.FILES)
+        if user_form.is_valid() and profile_form.is_valid() and avatar_form.is_valid():
             user_form.save()
             profile_form.save()
             avatar_form.save()

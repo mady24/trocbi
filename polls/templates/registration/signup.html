@@ -39,7 +39,7 @@
     </style>
 </head>
 
-<body class="logIn">
+<body>
     <div class="headerl">
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <a class="navbar-brand" href="/"><img src="{% static 'img/logo.png'%}" alt="" style="height:40px;"></a>
@@ -81,7 +81,7 @@
         </div>
     </div>
     <div class="search" align="center">
-        <div class="searchForm">
+        <div class="searchFormY">
             <form action="">
                 <div class="row form">
                     <div class="col-lg-3">
@@ -92,7 +92,10 @@
                         </select>
                     </div>
                     <div class="col-lg-6">
-                        <input type="text" name="" id="" class="form-control">
+                        <input type="text" name="searched" id="searched" class="form-control">
+                        <div class="result" id='replaceable-content' style="background-color: #FFF; min-width: 100%; position: absolute; z-index: 10;">
+                            {% include 'polls/template/result.html' %}
+                        </div>
                     </div>
                     <div class="col-lg-3">
                         <input type="button" value="Rechercher" class="btn btn-third btn-block">
@@ -102,11 +105,11 @@
         </div>
     </div>
 
-    <div class="signUp">
+    <div class="signUp" style="margin-bottom: 5%;">
         <h1>Inscription</h1>
         <div class="row">
-        <div class="col-lg-5 col-sm-12"
-            style="border: 1px solid rgba(112,112,112,.16);box-shadow: 1px 2px rgba(0,0,0,0.16);">
+        <div class="col-lg-5">
+            <div class="container" style="border: 1px solid rgba(112,112,112,.16);box-shadow: 1px 2px rgba(0,0,0,0.16); padding: 3%;">
 
             <div class="loginForm">
                 <div class="formHeader">
@@ -123,6 +126,10 @@
                             {% endfor %}
                         
                         {% endfor %}
+                        <div class="form-group">
+                        <input type="checkbox" name="cu" id="cu" class="form-control" required>
+                        <label for="cu">"J'accepte les Conditions Générales de Vente et les Conditions Générales d'utilisation."</label>
+                        </div>
                         <div class="align-content-xl-center"
                             style="padding-left: 20%; padding-right: 20%; padding-top: 2%;" align="center">
                             <input type="submit" value="S'inscrire" class="btn btn-sm btn-third btn-block">
@@ -139,10 +146,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-5 col-sm-0 signUpRight"></div>
+        </div>
+        <div class="col-lg-5 signUpRight"></div>
     </div>
     </div>
-    <div class="footer">
+    <div class="footer" style="position: absolute; bottom: 0; position: fixed;">
         <div class="row" style="width: 100%;">
         <div class="col-lg-6 social">
             <ul class="su">
@@ -159,6 +167,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="{% static 'bootstrap.bundle.min.js'%}"></script>
     <script src="{% static 'popper.min.js'%}"></script>
+    <script src="{% static 'ajax.js' %}"></script>
 </body>
 
 </html>

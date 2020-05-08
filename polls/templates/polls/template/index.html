@@ -31,7 +31,8 @@
 </head>
 
 <body>
-    <div class="header">
+
+    <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <a class="navbar-brand" href="/"><img src="{% static 'img/logo.png'%}" alt="" style="height:40px;"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -56,7 +57,12 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="{% static 'img/user.png' %}" style="height:20px;">
+                            {% if user.profile.avatar.url == '' %}
+                            <img id="pp" src="{% static 'img/user.png' %}" alt="" style="height:20px;">
+                            {% else %}
+                            <img id="pp" src="{{user.avatar.avatar.url}}" alt=""
+                                style="height:20px; border-radius: 50%;">
+                            {% endif %}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="profile">Mon profil</a>
@@ -65,7 +71,7 @@
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link btn btn-primary" href="login">Se Connecter</a>
+                        <a class="nav-link btn btn-fith" href="login">Se Connecter</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link btn btn-secondary" href="signup">Inscription</a>
@@ -74,7 +80,81 @@
                 </ul>
             </div>
         </nav>
-        <div class="content">
+    </header>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="bd-placeholder-img"
+                    src="{% static 'img/close-up-photo-of-smiling-girl-covering-mouth-1445465.png' %}" width="100%"
+                    height="100%">
+                <div class="container">
+                    <div class="carousel-caption text-left">
+                        <h1 class="slog">
+                            Troquez , Economisez ,<span> Profitez</span>
+                        </h1>
+                        <br>
+                        <br>
+                        <h1 class="descrip">
+                            Votre premier réseau collaboratif<br>de troc au <span>Sénégal</span>
+                        </h1>
+                        <br>
+                        <br>
+                        <br>
+                        <p><a {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}
+                                class="btn btn-third btn-lg">Déposer une annonce</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="bd-placeholder-img" width="100%" height="100%"
+                    src="{% static 'img/woman-in-black-coat-standing-on-sidewalk-3765160.png' %}">
+                <div class="container">
+                    <div class="carousel-caption text-left">
+                        <h1 class="slog">
+                            Troquez , Economisez ,<span> Profitez</span>
+                        </h1>
+                        <br>
+                        <br>
+                        <h1 class="descrip">
+                            Votre premier réseau collaboratif<br>de troc au <span>Sénégal</span>
+                        </h1>
+                        <br>
+                        <br>
+                        <br>
+                        <p><a {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}
+                                class="btn btn-third btn-lg">Déposer une annonce</a></p>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="carousel-item">
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
+                <div class="container">
+                  <div class="carousel-caption text-right">
+                    <h1 class="slog">
+                        Troquez, Economisez,<br><span>Profitez</span>
+                    </h1>
+                    <h1 class="descrip">
+                        Votre premier réseau collaboratif<br>de troc au <span>Sénégal</span>
+                    </h1>
+                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+                  </div>
+                </div>
+              </div>-->
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <!--<div class="content">
             <div class="slogan">
                 <h1 class="slog">
                     Troquez, Economisez,<br><span>Profitez</span>
@@ -87,11 +167,12 @@
                 <a {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}
                     class="btn btn-third btn-lg">Déposer une annonce</a>
             </div>
-        </div>
-    </div>
+        </div>-->
+
     <div class="search" id="search" align='center'>
         <div class="searchForm" align="center">
-            <form action="">
+            <form action="search/" method="POST">
+                {% csrf_token %}
                 <div class="row form">
                     <div class="col-lg-3">
                         <select name="categorie" id="" class="form-control">
@@ -101,10 +182,15 @@
                         </select>
                     </div>
                     <div class="col-lg-6">
-                        <input type="text" name="" id="" class="form-control" placeholder="Que recherchez-vous?">
+                        <input type="text" name="searched" id="searched" class="form-control"
+                            placeholder="Que recherchez-vous?">
+                        <div class="result" id='replaceable-content'
+                            style="background-color: #FFF; min-width: 100%; position: absolute;">
+                            {% include 'polls/template/result.html' %}
+                        </div>
                     </div>
                     <div class="col-lg-3">
-                        <input type="button" value="Rechercher" class="btn btn-fourth btn-block">
+                        <input type="submit" value="Rechercher" class="btn btn-fourth btn-block">
                     </div>
                 </div>
             </form>
@@ -248,24 +334,33 @@
                 </h3>
                 <div class="recentDetailsDescrip">
                     <h6 class="recentDetailsDescripSub">
-                        Stockage 128 Go
+                        {{prop.l_descrip}}
                     </h6>
                     <h6 class="recentDetailsDescripAddress">
-                        Dakar, Guelue Tapé-Fass-Colobane
+                        {{prop.user.profile.address}}
                     </h6>
                 </div>
                 <h1 class="Price">
                     {{ prop.prix_achat}}
                 </h1>
                 <h6 class="owner">
-                    Arame Ndiaye
+                    {{prop.user}}
                 </h6>
                 <h6 class="ref">
-                    Ref: 05775O869
+                    {{prop.id}}
                 </h6>
                 <h6 class="miseEnLigne">
                     Mise en ligne: {{ prop.pub_date}}
                 </h6>
+                {% if prop.typeProp == 'offre' %}
+                <h5
+                    style="text-align: center; border-radius: 20px; background-color: #FA303E; width: 15%; right: 0% !important; left: inherit; float: right; color: #FFF; padding: 3px;">
+                    Offre</h5>
+                {% else %}
+                <h5
+                    style="text-align: center; border-radius: 20px; background-color: #F2BB03; width: 15%; right: 0% !important; left: inherit; float: right; color: #FFF; padding: 3px;">
+                    Deman</h5>
+                {% endif %}
             </div>
         </div>
         {% endfor %}
@@ -342,17 +437,34 @@
     </div>-->
     <div class="newsletter">
         <div class="row">
-            <div class="col-lg-6"></div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1 style="text-align: center;">A Propos</h1>
+                        <p style="font-size: 20px; font-weight: bold; text-align: center;">TrocBi est un site de
+                            e-commerce qui vous permettra de troquer vos objets en toute facilité avec une interface
+                            simple accessible pour toutes les couches de la population , profitez juste …</p>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1 style="text-align: center;">Envoyez nous E-mail à:</h1>
+                        <h4 style="text-align: center;">infos@trocbi.com</h4>
+                    </div>
+                </div>
+            </div>
             <div class="col-lg-6">
                 <div class="textletter">
                     <br><br>
                     <div class="row">
                         <div class="col-md-5">
-                    <h1 class="letterTitle">Newsletter</h1>
-                    </div>
-                    <div class="col-md-7">
-                        <img src="{% static 'img/union4.png' %}" alt="" style="height: 50px;">
-                    </div>
+                            <h1 class="letterTitle">Newsletter</h1>
+                        </div>
+                        <div class="col-md-7">
+                            <img src="{% static 'img/Union4.png' %}" alt="" style="height: 50px;">
+                        </div>
                     </div>
                     <br>
                     <br>
@@ -456,6 +568,47 @@
         if (id == '#search') {
             document.getElementById('search').style.marginTop == '10%';
         }
+
+        const user_input = $("#searched")
+        //const search_icon = $('#search-icon')
+        const artists_div = $('#replaceable-content')
+        const endpoint = '/'
+        const delay_by_in_ms = 700
+        let scheduled_function = false
+
+        let ajax_call = function (endpoint, request_parameters) {
+            $.getJSON(endpoint, request_parameters)
+                .done(response => {
+                    // fade out the artists_div, then:
+                    artists_div.fadeTo('slow', 0).promise().then(() => {
+                        // replace the HTML contents
+                        artists_div.html(response['html_from_view'])
+                        // fade-in the div with new contents
+                        artists_div.fadeTo('slow', 1)
+                        // stop animating search icon
+                        //search_icon.removeClass('blink')
+                    })
+                })
+        }
+
+
+        user_input.on('keyup', function () {
+
+            const request_parameters = {
+                q: $(this).val() // value of user_input: the HTML element with ID user-input
+            }
+
+            // start animating the search icon with the CSS class
+            //search_icon.addClass('blink')
+
+            // if scheduled_function is NOT false, cancel the execution of the function
+            if (scheduled_function) {
+                clearTimeout(scheduled_function)
+            }
+
+            // setTimeout returns the ID of the function to be executed
+            scheduled_function = setTimeout(ajax_call, delay_by_in_ms, endpoint, request_parameters)
+        })
     </script>
 </body>
 

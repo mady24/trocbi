@@ -16,62 +16,74 @@
     <div class="headerl">
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <a class="navbar-brand" href="/"><img src="{% static 'img/logo.png'%}" alt="" style="height:40px;"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-          
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                  <a class="scrolle btn btn-primary btn-block" {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}>Déposer une annonce</a>
-                </li>
-                <li class="nav-item" style="border-right: #000 solid 1px;">
-                  <a class="nav-link" href="#search"><i class="fa fa-search" style="font-size: 20px; font-weight:lighter;"></i></a>
-                </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Mes favoris</a>
-                  </li>
-                <li class="nav-item dropdown dropleft">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="{% static 'img/user.png' %}" style="height:20px;">
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="profile">Mon profil</a>
-                    <a class="dropdown-item" href="logout">Deconnexion</a>
-                  </div>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                  <a class="nav-link btn btn-primary" href="login">Connexion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-secondary" href="signup">Inscription</a>
-                  </li>
-                  {% endif %}
-              </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="scrolle btn btn-primary btn-block" {% if user.is_authenticated %}
+                            href="/passerannonce" {% else %} href="/login" {% endif %}>Déposer une annonce</a>
+                    </li>
+                    <li class="nav-item" style="border-right: #000 solid 1px;">
+                        <a class="nav-link" href="#search"><i class="fa fa-search"
+                                style="font-size: 20px; font-weight:lighter;"></i></a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mes favoris</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {% if user.profile.avatar.url == '' %}
+                            <img id="pp" src="{% static 'img/user.png' %}" alt="" style="height:20px;">
+                            {% else %}
+                            <img id="pp" src="{{user.avatar.avatar.url}}" alt=""
+                                style="height:20px; border-radius: 50%;">
+                            {% endif %}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/profile">Mon profil</a>
+                            <a class="dropdown-item" href="logout">Deconnexion</a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary" href="login">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-secondary" href="signup">Inscription</a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
-          </nav>
+        </nav>
         <div class="content cl" style="margin-top: 50px;">
 
         </div>
     </div>
     <div class="search" align="center">
-        <div class="searchForm">
+        <div class="searchFormY">
             <form action="">
                 <div class="row form">
                     <div class="col-lg-3">
-                        <select name="categorie" id="" class="select-css">
+                        <select name="categorie" id="" class="form-control">
                             {% for prop in sousFamille %}
                             <option>{{ prop.sous_famille}}</option>
                             {% endfor %}
                         </select>
                     </div>
                     <div class="col-lg-6">
-                        <input type="text" name="" id="" class="formControl">
+                        <input type="text" name="searched" id="searched" class="form-control">
+                        <div class="result" id='replaceable-content' style="background-color: #FFF; min-width: 100%; position: absolute; z-index: 10;">
+                            {% include 'polls/template/result.html' %}
+                        </div>
                     </div>
                     <div class="col-lg-3">
-                        <input type="button" value="Rechercher" class="btn btn-secondary">
+                        <input type="button" value="Rechercher" class="btn btn-third">
                     </div>
                 </div>
             </form>
@@ -80,32 +92,32 @@
     <div class="details">
         <div class="cat1">
             <h6 class="catT">Catégories:&nbsp;&nbsp;&nbsp;&nbsp;</h6>
-            <h6 class="catTs">{{post.nature}}</h6>
+            <h6 class="catTs">{{posts.nature}}</h6>
         </div>
-        <div class="detailF">
-            <div class="detailIPR">
-                <div class="im">
-                    <div class="imB">
-                        {% if post.image1.url != null %}
-                <img src="{{post.image1.url}}" alt="">
-                {% else %}
-                <img src="{% static 'img/not-found.png' %}" alt="">
-                {% endif %}
+        <div class="row detailF">
+            <div class="col-lg-9 detailIPR">
+                <div class=" row">
+                    <div class="col-lg-8 imB">
+                        {% if posts.image1.url != null %}
+                        <img src="{{posts.image1.url}}" alt="">
+                        {% else %}
+                        <img src="{% static 'img/not-found.png' %}" alt="">
+                        {% endif %}
                     </div>
-                    <div class="imS">
-                        <div class="imST">
-                            {% if post.image2.url != null %}
-                            <img src="{{post.image2.url}}" alt="">
+                    <div class="col-lg-4 imS">
+                        <div class="row imST">
+                            {% if posts.image2.url != null %}
+                            <img src="{{posts.image2.url}}" alt="">
                             {% else %}
                             <img src="{% static 'img/not-found.png' %}" alt="">
                             {% endif %}
                         </div>
-                        <div class="imSB">
-                            {% if post.image3.url != null %}
-                <img src="{{post.image3.url}}" alt="">
-                {% else %}
-                <img src="{% static 'img/not-found.png' %}" alt="">
-                {% endif %}
+                        <div class="row imSB">
+                            {% if posts.image3.url != null %}
+                            <img src="{{posts.image3.url}}" alt="">
+                            {% else %}
+                            <img src="{% static 'img/not-found.png' %}" alt="">
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -123,20 +135,24 @@
                     </div>
                     <div class="detailC">
                         <h5 class="prixD">
-                            {{post.prix_achat}} fcfa
+                            {{posts.prix_achat}} fcfa
                         </h5>
                         <h5 class="refD">
-                            {{post.id}}
+                            {{posts.id}}
                         </h5>
                     </div>
                 </div>
             </div>
-            <div class="detailO" align="center">
-                <img src="{% static 'img/user.png'%}" alt="">
+            <div class="col-lg-2 detailO" align="center">
+                {% if usr.avatar.avatar.url == '' %}
+                <img id="pp" src="{% static 'img/user.png' %}" alt="">
+                {% else %}
+                <img id="pp" src="{{usr.avatar.avatar.url}}" alt="" style="border-radius: 50%;">
+                {% endif %}
                 <h6 class="ownerN">
-                    Arame Ndiaye
+                    {{posts.user}}
                 </h6>
-                <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-third">Contacter</a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-sixth">Contacter</a>
             </div>
         </div>
         <div class="detailDescri">
@@ -144,30 +160,26 @@
                 Description :
             </h1>
             <p style="font-size: 15px;">
-                {{post.description}}
+                {{posts.description}}
             </p>
         </div>
         <div class="articles">
             <div class="articlesT">
                 <h1>Artciles :</h1>
             </div>
-            <div class="articlesL">
-                <div class="articlesLC">
-                    <img src="img/howard-bouchevereau-RSCirJ-2.png" alt="">
-                    <h1>MacBook Pro 2016</h1>
+            <div class="articlesL row">
+                {% for oth in oth %}
+                <div class="col-lg-3 col-md-3">
+                    <div class="articlesLC">
+                        {% if oth.image1.url != null %}
+                        <img src="{{oth.image1.url}}" alt="">
+                        {% else %}
+                        <img src="{% static 'img/not-found.png' %}" alt="">
+                        {% endif %}
+                        <h1>{{oth.name}}</h1>
+                    </div>
                 </div>
-                <div class="articlesLC">
-                    <img src="img/howard-bouchevereau-RSCirJ-2.png" alt="">
-                    <h1>MacBook Pro 2016</h1>
-                </div>
-                <div class="articlesLC">
-                    <img src="img/howard-bouchevereau-RSCirJ-2.png" alt="">
-                    <h1>MacBook Pro 2016</h1>
-                </div>
-                <div class="articlesLC">
-                    <img src="img/howard-bouchevereau-RSCirJ-2.png" alt="">
-                    <h1>MacBook Pro 2016</h1>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -183,7 +195,7 @@
             <div class="col-lg-6 nc">
                 Contact Number: 00221773832393
             </div>
-            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="{% static 'bootstrap.bundle.min.js'%}"></script>
@@ -197,23 +209,65 @@
         });
 
         function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
 
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
+        // Close the dropdown menu if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
+       /* const user_input = $("#searched")
+        //const search_icon = $('#search-icon')
+        const artists_div = $('#replaceable-content')
+        const endpoint = '/search/'
+        const delay_by_in_ms = 700
+        let scheduled_function = false
+
+        let ajax_call = function (endpoint, request_parameters) {
+            $.getJSON(endpoint, request_parameters)
+                .done(response => {
+                    // fade out the artists_div, then:
+                    artists_div.fadeTo('slow', 0).promise().then(() => {
+                        // replace the HTML contents
+                        artists_div.html(response['html_from_view'])
+                        // fade-in the div with new contents
+                        artists_div.fadeTo('slow', 1)
+                        // stop animating search icon
+                        //search_icon.removeClass('blink')
+                    })
+                })
+        }
+
+
+        user_input.on('keyup', function () {
+
+            const request_parameters = {
+                q: $(this).val() // value of user_input: the HTML element with ID user-input
+            }
+
+            // start animating the search icon with the CSS class
+            //search_icon.addClass('blink')
+
+            // if scheduled_function is NOT false, cancel the execution of the function
+            if (scheduled_function) {
+                clearTimeout(scheduled_function)
+            }
+
+            // setTimeout returns the ID of the function to be executed
+            scheduled_function = setTimeout(ajax_call, delay_by_in_ms, endpoint, request_parameters)
+        })*/
     </script>
+    <script src="{% static 'ajax.js' %}"></script>
 </body>
 
 </html>

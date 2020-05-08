@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from PIL import Image
 
 ETAT_ACHAT = (
     ("NEUF", "NEUF"),
@@ -46,6 +47,7 @@ class PostProp(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
     nature = models.ForeignKey(NatureBien, on_delete=models.CASCADE)
+    l_descrip = models.CharField(max_length=80)
     description = models.CharField(max_length=1000)
     durée_util = models.IntegerField(max_length=10, null=True)
     prix_achat = models.FloatField(max_length=10)
@@ -57,8 +59,19 @@ class PostProp(models.Model):
     image1 = models.ImageField(blank=True, null=True)
     image2 = models.ImageField(blank=True, null=True)
     image3 = models.ImageField(blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return '%d'%(self.id)
+
+    def saveDemande(self):
+        super().save()
+        if self.image1.path != '':
+            img = Image.open(self.image1.path)
+
+            if img.height < 1500 or img.width < 1500:
+                output_size = (1500,1500)
+                img.thumbnail(output_size)
+                img.save(self.image1.path, dpi=(150,150))
 
 class PostSearch(models.Model):
     name = models.CharField(max_length=200)
@@ -81,9 +94,19 @@ class Profile(models.Model):
 
 class Avatar(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(upload_to='',blank=True,null=True)
+    avatar = models.ImageField(default='user.png', upload_to='media',blank=True,null=True)
     def __str__(self):
-        return '%s'%(self.user)
+        return f'{self.user.username} avatar'
+
+    def save(self):
+        super().save()
+
+        img = Image.open(self.avatar.path)
+
+        if img.height > 300 or img.width > 300:
+            output_size = (300,300)
+            img.thumbnail(output_size)
+            img.save(self.avatar.path, dpi=(150,150))
 
 
 @receiver(post_save, sender=User)

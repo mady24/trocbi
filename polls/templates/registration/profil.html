@@ -47,6 +47,19 @@
             margin-left: 25%;
             top: 0;
         }
+
+        .imnd .form-group {
+            color: rgba(0, 0, 0, 0.0);
+        }
+
+        .imnd .form-group input{
+            color: rgba(0, 0, 0, 1);
+        }
+
+       .imnd .form-group label,a{
+            display: none;
+            color: rgba(0, 0, 0, 0.0);
+        }
     </style>
 </head>
 
@@ -69,10 +82,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Mes favoris</a>
                     </li>
-                    <li class="nav-item dropdown dropleft">
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="{% static 'img/user.png' %}" style="height:20px;">
+                            {% if user.profile.avatar.url == '' %}
+                    <img id="pp" src="{% static 'img/user.png' %}" alt="" style="height:20px;">
+                    {% else %}
+                    <img id="pp" src="{{user.avatar.avatar.url}}" alt="" style="height:20px; border-radius: 50%;">
+                    {% endif %}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="profile">Mon profil</a>
@@ -111,19 +128,18 @@
                                 {{ user_form.first_name | bootstrap }}
                             </div>
                         </div>
-                        <div class="col-lg-4" align="center">
+                        <div class="col-lg-4 imnd" align="center">
                             <div class="row cen">
                                 <p style="text-align: center; width: 50%;">Photo de profil</p>
                             </div>
                             <div class="row cen">
-                                {% if profile.avatar.url == '' %}
+                                {% if user.profile.avatar.url == '' %}
                                 <img id="pp" src="{% static 'img/user.png' %}" alt="" style="width: 50%;">
                                 {% else %}
-                                <img id="pp" src="{{profile.avatar.url}}" alt="" style="width: 50%;">
-                                <a href="{{profile.avatar.url}}">test</a>
+                                <img id="pp" src="{{user.avatar.avatar.url}}" alt="" style="width: 50%; border-radius: 50%;">
                                 {% endif %}
                             </div>
-                            {{ avatar_form.avatar }}
+                            {{ avatar_form.avatar | bootstrap }}
                         </div>
                     </div>
                     <div class="row">
@@ -149,7 +165,7 @@
                 </form>
             </fieldset>
         </div>
-        <div class="cmp">
+        <!--<div class="cmp">
             <fieldset>
                 <legend>Modifier mon mot de passe</legend>
                 <form action="" method="post"></form>
@@ -177,7 +193,7 @@
                     <input type="submit" class="btn btn-third" value="Changer">
                 </div>
             </fieldset>
-        </div>
+        </div>-->
     </div>
     <div class="footer">
         <div class="social">

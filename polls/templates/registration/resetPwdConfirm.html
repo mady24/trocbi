@@ -1,0 +1,63 @@
+{% load static %}
+{% load bootstrap %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>TrocBi</title>
+</head>
+
+<body class="logIn">
+    <div class="headerl">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <a class="navbar-brand" href="/"><img src="{% static 'img/logo.png'%}" alt="" style="height:40px;"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="btn btn-third btn-block" href="#search"><i class="fa fa-search" style="font-size: 20px; font-weight:lighter;"> Rechercher</i></a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        <div class="cl2" style="margin-top: 50px;">
+            <h1 style="text-align: center;">Réinitialiser le mot de passe</h1>
+        </div>
+    </div>
+    <div class="row" style="margin-left: 10%; margin-right: 10%; margin-top: 5%;">
+    <div class="col-lg-4">
+    </div>
+        <div class="col-lg-4" style="border: 1px solid rgba(112,112,112,.16);box-shadow: 1px 2px rgba(0,0,0,0.16); padding: 3%;">
+            <div class="container">
+        <div>
+            <h6 style="text-align: center;">Bonjour</h6>
+        </div>
+        <div class="formLogin">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form | bootstrap }}
+                <div class="align-content-xl-center" style="padding-left: 20%; padding-right: 20%; padding-top: 2%;" align="center">
+                    <button type="submit" class="btn btn-sm btn-third btn-block">Réinitialiser le mot de passe</button>
+                </div>
+            </form>
+        </div>
+        
+        </div>
+        </div>
+    </div>
+    
+<div style="" class="logInFooter"></div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="{% static 'bootstrap.bundle.min.js'%}"></script>
+<script src="{% static 'popper.min.js'%}"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% load static %}
+{% if post %}
+  <ul>
+  {% for post in post %}
+    <li style="list-style: none;"><a href="/{{post.id}}/"><div class="row">
+        <div class="col-lg-4">
+            {% if post.image1.url != null %}
+                <img src="{{post.image1.url}}" style="max-width: 100px; max-height: 100px;"  alt="">
+            {% else %}
+                <img src="{% static 'img/not-found.png' %}" style="max-width: 100px; max-height: 100px;"  alt="">
+            {% endif %}
+        </div>
+        <div class="col-lg-4">
+            <div class="row">
+                {{ post.name }}
+            </div>
+            <div class="row">
+                {{post.prix_achat}}
+            </div>
+        </div>
+    </div></a>
+<br></li>
+  {% endfor %}
+  </ul>
+{% else %}
+  
+{% endif %}

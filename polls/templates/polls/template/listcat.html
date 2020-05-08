@@ -16,48 +16,57 @@
     <div class="headerl">
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <a class="navbar-brand" href="/"><img src="{% static 'img/logo.png'%}" alt="" style="height:40px;"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-          
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                  <a class="nav-link scrolle btn btn-primary" {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}>Déposer une annonce</a>
-                </li>
-                <li class="nav-item" style="border-right: #000 solid 1px;">
-                  <a class="nav-link" href="#search"><i class="fa fa-search" style="font-size: 20px; font-weight:lighter;"></i></a>
-                </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Mes favoris</a>
-                  </li>
-                <li class="nav-item dropdown dropleft">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="{% static 'img/user.png' %}" style="height:20px;">
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="profile">Mon profil</a>
-                    <a class="dropdown-item" href="logout">Deconnexion</a>
-                  </div>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                  <a class="btn btn-primary btn-block" href="login">Connexion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-secondary btn-block" href="signup">Inscription</a>
-                  </li>
-                  {% endif %}
-              </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link scrolle btn btn-primary" {% if user.is_authenticated %} href="/passerannonce"
+                            {% else %} href="/login" {% endif %}>Déposer une annonce</a>
+                    </li>
+                    <li class="nav-item" style="border-right: #000 solid 1px;">
+                        <a class="nav-link" href="#search"><i class="fa fa-search"
+                                style="font-size: 20px; font-weight:lighter;"></i></a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mes favoris</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {% if user.profile.avatar.url == '' %}
+                            <img id="pp" src="{% static 'img/user.png' %}" alt="" style="height:20px;">
+                            {% else %}
+                            <img id="pp" src="{{user.avatar.avatar.url}}" alt=""
+                                style="height:20px; border-radius: 50%;">
+                            {% endif %}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="profile">Mon profil</a>
+                            <a class="dropdown-item" href="logout">Deconnexion</a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="btn btn-primary btn-block" href="login">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-secondary btn-block" href="signup">Inscription</a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
-          </nav>
-        <div class="content cl" style="margin-top: 50px;">
-            
+        </nav>
+        <div class="content cl" style="min-height:20vh">
+
         </div>
     </div>
     <div class="search" align="center">
-        <div class="searchForm">
+        <div class="searchFormY">
             <form action="">
                 <div class="row form">
                     <div class="col-lg-3">
@@ -68,7 +77,11 @@
                         </select>
                     </div>
                     <div class="col-lg-6">
-                        <input type="text" name="" id="" class="form-control">
+                        <input type="text" name="searched" id="searched" class="form-control">
+                        <div class="result" id='replaceable-content'
+                            style="background-color: #FFF; min-width: 100%; position: absolute;">
+                            {% include 'polls/template/result.html' %}
+                        </div>
                     </div>
                     <div class="col-lg-3">
                         <input type="button" value="Rechercher" class="btn btn-third btn-block">
@@ -77,14 +90,14 @@
             </form>
         </div>
     </div>
-    <div class="recent">
+    <div class="recent" style="margin-bottom: 15vh;">
         {% if prop %}
 
         {% for prop in prop %}
         {% for p in p %}
         {% for p in p %}
         {% if prop.id|slugify == p|slugify %}
-        
+
         <div class="row recentItem" onclick="linkTo('{{ prop.id }}')">
             <div class="col-lg-4 recentImg">
                 {% if prop.image1.url != null %}
@@ -99,10 +112,10 @@
                 </h3>
                 <div class="recentDetailsDescrip">
                     <h6 class="recentDetailsDescripSub">
-                        Stockage 128 Go
+                        {{prop.l_descrip}}
                     </h6>
                     <h6 class="recentDetailsDescripAddress">
-                        Dakar, Guelue Tapé-Fass-Colobane
+                        {{prop.user.profile.address}}
                     </h6>
                 </div>
                 <h1 class="Price">
@@ -117,51 +130,120 @@
                 <h6 class="miseEnLigne">
                     Mise en ligne: {{ prop.pub_date}}
                 </h6>
+                {% if prop.typeProp == 'offre' %}
+                <h5
+                    style="text-align: center; border-radius: 20px; background-color: #FA303E; width: 15%; right: 0% !important; left: inherit; float: right; color: #FFF; padding: 3px;">
+                    Offre</h5>
+                {% else %}
+                <h5
+                    style="text-align: center; border-radius: 20px; background-color: #F2BB03; width: 15%; right: 0% !important; left: inherit; float: right; color: #FFF; padding: 3px;">
+                    Deman</h5>
+                {% endif %}
             </div>
         </div>
         {% endif %}
         {% endfor %}
         {% endfor %}
         {% endfor %}
+        <div class="pos">
+            <div class="row">
+                {% if prop.has_previous %}
+                <div class="col-lg-1 col-sm-1">
+
+                    <div class="posLeft"><span><a href="?page=1">&laquo;</a></span></div>
+
+
+                </div>
+                <div class="col-lg-1 col-sm-1">
+
+
+                    <div class="posLeft"><span><a href="?page={{ prop.previous_page_number }}">&#x2039;</a></span></div>
+
+                </div>
+                {% else %}
+                <div class="col-lg-1 col-sm-1">
+
+                    <div class="posLeft"><span><a
+                                style="color: currentColor; cursor: not-allowed; opacity: 0.5; text-decoration: none;"
+                                href="#">&laquo;</a></span></div>
+
+
+                </div>
+                <div class="col-lg-1 col-sm-1">
+
+
+                    <div class="posLeft"><span><a
+                                style="color: currentColor; cursor: not-allowed; opacity: 0.5; text-decoration: none;"
+                                href="#">&#x2039;</a></span></div>
+
+                </div>
+                {% endif %}
+                <div class="col-lg-8 col-sm-8">
+                    <div class="posScale">
+                        <div class="posScaleCh">
+                            <div class="num">{{ prop.number }}</div>
+                        </div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh">
+                            <div class="num">{{ prop.paginator.num_pages }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% if prop.has_next %}
+                <div class="col-lg-1 col-sm-1">
+
+                    <div class="posRight"><span><a href="?page={{ prop.next_page_number }}">&#x203A;</a></span></div>
+
+
+                </div>
+                <div class="col-lg-1 col-sm-1">
+
+
+                    <div class="posRight"><span><a href="?page={{ prop.paginator.num_pages }}">&raquo;</a></span></div>
+
+                </div>
+                {% else %}
+                <div class="col-lg-1 col-sm-1">
+
+                    <div class="posRight"><span><a
+                                style="color: currentColor; cursor: not-allowed; opacity: 0.5; text-decoration: none;"
+                                href="#">&#x203A;</a></span></div>
+
+
+                </div>
+                <div class="col-lg-1 col-sm-1">
+
+
+                    <div class="posRight"><span><a
+                                style="color: currentColor; cursor: not-allowed; opacity: 0.5; text-decoration: none;"
+                                href="#">&raquo;</a></span></div>
+
+                </div>
+                {% endif %}
+            </div>
+        </div>
         {% else %}
         <p>No polls are available.</p>
         {% endif %}
-        <div class="pos">
-            <div class="row">
-                <div class="col-lg-2 col-sm-2">
-            <div class="posLeft"><span>&#x2039;</span></div>
-                </div>
-                <div class="col-lg-8 col-sm-8">
-            <div class="posScale">
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-                <div class="posScaleCh"></div>
-            </div>
-                </div>
-                <div class="col-lg-2 col-sm-2">
-            <div class="col-lg-2 posRight"><span>&#x203A;</span></div>
-            </div> 
-            </div>
-        </div>
     </div>
-    <div class="footer black">
+    <div class="footer black" style="position: absolute; bottom: 0; position: fixed;">
         <div class="row" style="width: 100%;">
             <div class="col-lg-6 social">
                 <ul class="su">
@@ -173,7 +255,7 @@
             <div class="col-lg-6 nc">
                 Contact Number: 00221773832393
             </div>
-            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="{% static 'bootstrap.bundle.min.js'%}"></script>
@@ -189,7 +271,49 @@
         function linkTo(id) {
             window.location.href = "/" + id + "/";
         }
+
+        /*const user_input = $("#searched")
+        //const search_icon = $('#search-icon')
+        const artists_div = $('#replaceable-content')
+        const endpoint = '/cat/'
+        const delay_by_in_ms = 700
+        let scheduled_function = false
+
+        let ajax_call = function (endpoint, request_parameters) {
+            $.getJSON(endpoint, request_parameters)
+                .done(response => {
+                    // fade out the artists_div, then:
+                    artists_div.fadeTo('slow', 0).promise().then(() => {
+                        // replace the HTML contents
+                        artists_div.html(response['html_from_view'])
+                        // fade-in the div with new contents
+                        artists_div.fadeTo('slow', 1)
+                        // stop animating search icon
+                        //search_icon.removeClass('blink')
+                    })
+                })
+        }
+
+
+        user_input.on('keyup', function () {
+
+            const request_parameters = {
+                q: $(this).val() // value of user_input: the HTML element with ID user-input
+            }
+
+            // start animating the search icon with the CSS class
+            //search_icon.addClass('blink')
+
+            // if scheduled_function is NOT false, cancel the execution of the function
+            if (scheduled_function) {
+                clearTimeout(scheduled_function)
+            }
+
+            // setTimeout returns the ID of the function to be executed
+            scheduled_function = setTimeout(ajax_call, delay_by_in_ms, endpoint, request_parameters)
+        })*/
     </script>
+    <script src="{% static 'ajax.js' %}"></script>
 </body>
 
 </html>

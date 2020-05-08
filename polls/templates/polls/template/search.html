@@ -1,0 +1,296 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>TrocBi</title>
+</head>
+
+<body>
+    <div class="headerl">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <a class="navbar-brand" href="/"><img src="{% static 'img/logo.png'%}" alt="" style="height:40px;"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link scrolle btn btn-primary" {% if user.is_authenticated %} href="/passerannonce"
+                            {% else %} href="/login" {% endif %}>Déposer une annonce</a>
+                    </li>
+                    <li class="nav-item" style="border-right: #000 solid 1px;">
+                        <a class="nav-link" href="#search"><i class="fa fa-search"
+                                style="font-size: 20px; font-weight:lighter;"></i></a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mes favoris</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {% if user.profile.avatar.url == '' %}
+                            <img id="pp" src="{% static 'img/user.png' %}" alt="" style="height:20px;">
+                            {% else %}
+                            <img id="pp" src="{{user.avatar.avatar.url}}" alt=""
+                                style="height:20px; border-radius: 50%;">
+                            {% endif %}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="profile">Mon profil</a>
+                            <a class="dropdown-item" href="logout">Deconnexion</a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="btn btn-primary btn-block" href="login">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-secondary btn-block" href="signup">Inscription</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        <div class="content cl" style="min-height: 20vh;">
+
+        </div>
+    </div>
+    <div class="search" align="center">
+        <div class="searchFormY">
+            <form action="" method="POST">
+                <div class="row form">
+                    <div class="col-lg-3">
+                        <select name="categorie" id="" class="form-control">
+                            {% for prop in sousFamille %}
+                            <option>{{ prop.sous_famille}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" name="searched" id="searched" class="form-control">
+                        <div class="result" id='replaceable-content' style="background-color: #FFF; min-width: 100%; position: absolute;">
+                            {% include 'polls/template/result.html' %}
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <input type="button" value="Rechercher" class="btn btn-third btn-block">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="recent">
+        {% if prop %}
+        {% for prop in prop %}
+        {% if prop %}
+
+        {% for prop in prop %}
+        <div class="row recentItem" onclick="linkTo('{{ prop.id }}')">
+            <div class="col-lg-4 recentImg">
+                {% if prop.image1.url != null %}
+                <img src="{{prop.image1.url}}" alt="">
+                {% else %}
+                <img src="{% static 'img/not-found.png' %}" alt="">
+                {% endif %}
+            </div>
+            <div class=" col-lg-8 recentDetails">
+                <h3 class="recentDetailsTitle">
+                    {{ prop.name}}
+                </h3>
+                <div class="recentDetailsDescrip">
+                    <h6 class="recentDetailsDescripSub">
+                        {{prop.l_descrip}}
+                    </h6>
+                    <h6 class="recentDetailsDescripAddress">
+                        {{prop.user.profile.address}}
+                    </h6>
+                </div>
+                <h1 class="Price">
+                    {{ prop.prix_achat}}
+                </h1>
+                <h6 class="owner">
+                    {{prop.user}}
+                </h6>
+                <h6 class="ref">
+                    {{prop.id}}
+                </h6>
+                <h6 class="miseEnLigne">
+                    Mise en ligne: {{ prop.pub_date}}
+                </h6>
+                {% if prop.typeProp == 'offre' %}
+                <h5
+                    style="text-align: center; border-radius: 20px; background-color: #FA303E; width: 15%; right: 0% !important; left: inherit; float: right; color: #FFF; padding: 3px;">
+                    Offre</h5>
+                {% else %}
+                <h5
+                    style="text-align: center; border-radius: 20px; background-color: #F2BB03; width: 15%; right: 0% !important; left: inherit; float: right; color: #FFF; padding: 3px;">
+                    Deman</h5>
+                {% endif %}
+            </div>
+        </div>
+
+        {% endfor %}
+        <div class="pos">
+            <div class="row">
+                {% if prop.has_previous %}
+                <div class="col-lg-1 col-sm-1">
+
+                    <div class="posLeft"><span><a href="?page=1">&laquo;</a></span></div>
+
+
+                </div>
+                <div class="col-lg-1 col-sm-1">
+
+
+                    <div class="posLeft"><span><a href="?page={{ prop.previous_page_number }}">&#x2039;</a></span></div>
+
+                </div>
+                {% else %}
+                <div class="col-lg-1 col-sm-1">
+
+                    <div class="posLeft"><span><a
+                                style="color: currentColor; cursor: not-allowed; opacity: 0.5; text-decoration: none;"
+                                href="#">&laquo;</a></span></div>
+
+
+                </div>
+                <div class="col-lg-1 col-sm-1">
+
+
+                    <div class="posLeft"><span><a
+                                style="color: currentColor; cursor: not-allowed; opacity: 0.5; text-decoration: none;"
+                                href="#">&#x2039;</a></span></div>
+
+                </div>
+                {% endif %}
+                <div class="col-lg-8 col-sm-8">
+                    <div class="posScale">
+                        <div class="posScaleCh">
+                            <div class="num">{{ prop.number }}</div>
+                        </div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh"></div>
+                        <div class="posScaleCh">
+                            <div class="num">{{ prop.paginator.num_pages }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% if prop.has_next %}
+                <div class="col-lg-1 col-sm-1">
+
+                    <div class="posRight"><span><a href="?page={{ prop.next_page_number }}">&#x203A;</a></span></div>
+
+
+                </div>
+                <div class="col-lg-1 col-sm-1">
+
+
+                    <div class="posRight"><span><a href="?page={{ prop.paginator.num_pages }}">&raquo;</a></span></div>
+
+                </div>
+                {% else %}
+                <div class="col-lg-1 col-sm-1">
+
+                    <div class="posRight"><span><a
+                                style="color: currentColor; cursor: not-allowed; opacity: 0.5; text-decoration: none;"
+                                href="#">&#x203A;</a></span></div>
+
+
+                </div>
+                <div class="col-lg-1 col-sm-1">
+
+
+                    <div class="posRight"><span><a
+                                style="color: currentColor; cursor: not-allowed; opacity: 0.5; text-decoration: none;"
+                                href="#">&raquo;</a></span></div>
+
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% else %}
+        <p>No polls are available.</p>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div class="footer black">
+        <div class="row" style="width: 100%;">
+            <div class="col-lg-6 social">
+                <ul class="su">
+                    <li><a href=""><i class="fa fa-facebook-square"></i></a></li>
+                    <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                    <li><a href=""><i class="fa fa-instagram"></i></a></li>
+                </ul>
+            </div>
+            <div class="col-lg-6 nc">
+                Contact Number: 00221773832393
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{% static 'ajax.js' %}"></script>
+    <script src="{% static 'bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'popper.min.js'%}"></script>
+    <script>
+        $(function () {
+            $(document).scroll(function () {
+                var $nav = $(".nav");
+                $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+            });
+        });
+
+        function linkTo(id) {
+            window.location.href = "/" + id + "/";
+        }
+
+        $(function () {
+
+            $('#search').keyup(function () {
+
+                $.ajax({
+                    type: "GET",
+                    url: "/search/",
+                    data: {
+                        'search_text': $('#searched').val(),
+                        'csrfmiddlewaretoken': $("input[name=csrfmiddlewaretoken]").val()
+                    },
+                    success: searchSuccess,
+                    dataType: 'html'
+                });
+            });
+        });
+
+        function searchSuccess(data, textStatus, jqXHR) {
+            $('#search-results').html(data)
+        }
+    </script>
+</body>
+
+</html>

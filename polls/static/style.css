@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Comic Neue', cursive sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 body{
@@ -471,10 +471,16 @@ small{
 }
 
 .catTitle{
-    
+    top: 30% !important;
+    left: 30% !important;
+    right: inherit;
     float: left;
     margin-top: 30px;
+    position: absolute;
+    hyphens: none;
 }
+
+
 
 .catTitle h3{
     text-align: center;
@@ -511,37 +517,7 @@ small{
     height: 300px;
 }
 
-@media screen and (max-width: 1366px){
-    .titleRecent img{
-        transform: translate(100%,70%);
-        height: 250px;
-    }
-}
 
-@media screen and (max-width: 1440px){
-    .titleRecent img{
-        transform: translate(100%,70%);
-        height: 250px;
-    }
-}
-
-@media screen and (max-width: 1024px){
-    .titleRecent img{
-        transform: translate(80%,70%);
-        height: 220px;
-    }
-}
-
-@media screen and (max-width: 768px){
-    .titleRecent img{
-       display: none;
-    }
-    .titleRecent{
-        background-color: #FFFFFF;
-        max-height: 10%;
-        margin-top: 5%;
-    }
-}
 
 .titleRecent .heading{
     background-color: #F2545B;
@@ -566,41 +542,11 @@ small{
     margin-top: 5%;
 }
 .titleRecents img{
-    transform: translate(350%, -80%);
+    transform: translate(400%, -80%);
     height: 300px;
 }
 
-@media screen and (max-width: 1440px){
-    .titleRecents img{
-        transform: translate(380%,-80%);
-        height: 250px;
-    }
-}
 
-@media screen and (max-width: 1366px){
-    .titleRecents img{
-        transform: translate(400%,-80%);
-        height: 220px;
-    }
-}
-
-@media screen and (max-width: 1024px){
-    .titleRecents img{
-        transform: translate(320%,-80%);
-        height: 220px;
-    }
-}
-
-@media screen and (max-width: 768px){
-    .titleRecents img{
-       display: none;
-    }
-    .titleRecents{
-        background-color: #FFFFFF;
-        max-height: 10%;
-        margin-top: 5%;
-    }
-}
 
 .titleRecents .headings{
     background-color: #F2BE8D;
@@ -664,15 +610,16 @@ small{
 
 .recent .recentItem .recentDetails  .recentDetailsDescrip{
     display: flex;
+    font-size: 20px;
     
 }
 
 .recent .recentItem .recentDetails  .recentDetailsDescrip .recentDetailsDescripSub{
-    font-size: 10px;
+    font-size: 15px;
 }
 
 .recent .recentItem .recentDetails  .recentDetailsDescrip .recentDetailsDescripAddress{
-    font-size: 10px;
+    font-size: 15px;
     margin-left: 2%;
 }
 
@@ -685,17 +632,17 @@ small{
 
 .recent .recentItem .recentDetails .owner{
     margin-top: 10%;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 300;
     color: #AEAFB0;
 }
 
 .recent .recentItem .recentDetails .ref{
-    font-size: 8px;
+    font-size: 12px;
 
 }
 .recent .recentItem .recentDetails .miseEnLigne{
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .recent .pos{
@@ -1217,11 +1164,23 @@ margin-top: 3%;
     margin-left: 35%;
 }
 
+.logInRight{
+    background-image: url('img/undraw_collaborators_prrw.png');
+    background-repeat: no-repeat;
+    position: absolute; 
+    background-size: contain;
+    background-position: right;
+    z-index: -1;
+    width: 30%;
+    height: 50%;
+    margin-left: 30%;
+}
+
 .signUp{
     margin-top: 1%;
     margin-left: 20%;
     margin-right: 10%;
-    margin-bottom: 2%;
+    margin-bottom: 5%;
     height: 80vh;
 }
 
@@ -1701,3 +1660,104 @@ margin-top: 3%;
   }
 
 /*end animations*/
+
+@media screen and (max-width: 1366px ){
+    .catTitle{
+        hyphens: auto;
+        font-size: 20px;
+        top: 5% !important;
+    left: 30% !important;
+    }
+
+    .titleRecent img{
+        transform: translate(50%,70%);
+        height: 250px;
+    }
+
+    .titleRecents img{
+        transform: translate(400%,-80%);
+        height: 220px;
+    }
+
+    .recent .recentItem{
+        display: block;
+    }
+
+    .recent .recentItem .recentImg{
+        width: 80%;
+        margin-left: 10%;
+     }
+
+     .carousel-item{
+         height: 100vh;
+     }
+
+}
+
+@media screen and (max-width: 1024px){
+    .catTitle{
+        hyphens: auto;
+        font-size: 13px;
+    }
+
+    .titleRecents img{
+        transform: translate(350%,-80%);
+        height: 220px;
+    }
+
+    .carousel-item{
+        height: 80vh;
+    }
+
+    .carousel-item .container h1{
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 991px){
+    .titleRecents img{
+       display: none;
+    }
+    .titleRecents{
+        background-color: #FFFFFF;
+        max-height: 10%;
+        margin-top: 5%;
+    }
+
+    .titleRecent img{
+        display: none;
+     }
+     .titleRecent{
+         background-color: #FFFFFF;
+         max-height: 10%;
+         margin-top: 5%;
+     }
+
+     .catSub{
+        list-style: none;
+        text-decoration: none;
+        text-align: left;
+        right: 0 !important;
+        bottom: 0;
+        position: absolute;
+    }
+
+    .carousel-item{
+        height: 50vh;
+    }
+
+    .carousel-item .container h1{
+        font-size: 15px;
+    }
+}
+
+
+.spacer{
+    min-height: 5%;
+    max-height: 5%;
+}
+
+.spacer1{
+    min-height: 5%;
+    max-height: 5%;
+}

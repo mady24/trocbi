@@ -9,5 +9,6 @@ admin.site.register(PostProp)
 admin.site.register(PostSearch)
 admin.site.register(Profile)
 admin.site.register(Avatar)
+admin.site.register(NewsLetter)
 
 # Register your models here.

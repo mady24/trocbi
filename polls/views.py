@@ -34,6 +34,19 @@ ETAT_ACTUEL = (
 )
 
 def index(request):
+    nss = 'none'
+    if request.method == 'POST':
+
+        if request.POST['news'] != None:
+            ns = NewsLetter(
+               mail=request.POST['news']
+            )
+            try:
+                ns.save()
+                nss = 'good'
+            except:
+                nss = 'bad'
+
     context = {}
     url_parameter = request.GET.get("q")
 
@@ -88,7 +101,8 @@ def index(request):
         'prop': prop, 
         'sf': zip1,
         'sf1': zip2,
-        'sf2': zip3
+        'sf2': zip3,
+        'nss': nss
     }
     return HttpResponse(template.render(context, request))
 
@@ -344,7 +358,7 @@ def profile(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
-        avatar_form = AvatarForm(request.POST, request.FILES)
+        avatar_form = AvatarForm(request.POST, request.FILES, instance=request.user.avatar)
         if user_form.is_valid() and profile_form.is_valid() and avatar_form.is_valid():
             user_form.save()
             profile_form.save()

@@ -23,3 +23,8 @@ class AvatarForm(forms.ModelForm):
     class Meta:
         model = Avatar
         fields = ['avatar']
+
+class NewsletterForm(forms.ModelForm):
+    class Meta:
+        model = NewsLetter
+        fields = ['mail']

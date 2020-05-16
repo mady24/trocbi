@@ -98,8 +98,8 @@ class Avatar(models.Model):
     def __str__(self):
         return f'{self.user.username} avatar'
 
-    def save(self):
-        super().save()
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
 
         img = Image.open(self.avatar.path)
 
@@ -119,5 +119,12 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
     instance.avatar.save()
+
+class NewsLetter(models.Model):
+    mail = models.EmailField(max_length=100, blank=False, null=False)
+    date = models.DateField(default=timezone.now())
+
+    def __str__(self):
+        return self.mail
 
 # Create your models here.

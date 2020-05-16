@@ -96,16 +96,13 @@
                         <h1 class="slog">
                             Troquez , Economisez ,<span> Profitez</span>
                         </h1>
-                        <br>
-                        <br>
+                        <div class="spacer"></div>
                         <h1 class="descrip">
                             Votre premier réseau collaboratif<br>de troc au <span>Sénégal</span>
                         </h1>
-                        <br>
-                        <br>
-                        <br>
+                        <div class="spacer1"></div>
                         <p><a {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}
-                                class="btn btn-third btn-lg">Déposer une annonce</a></p>
+                                class="btn btn-third">Déposer une annonce</a></p>
                     </div>
                 </div>
             </div>
@@ -126,7 +123,7 @@
                         <br>
                         <br>
                         <p><a {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}
-                                class="btn btn-third btn-lg">Déposer une annonce</a></p>
+                                class="btn btn-third">Déposer une annonce</a></p>
                     </div>
                 </div>
             </div>
@@ -239,23 +236,23 @@
             <div class="col-lg-4" align="center">
                 <div class="row cat" style=" padding-bottom: 5%;">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="catImg" align="center">
                                 <div class="im">
                                     <img src="{{p.image.url}}" alt="">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-sm-6">
 
                             <h3 class="catTitle">{{p.sous_famille}}</h3>
                         </div>
                     </div>
                     <div class="row" style="min-width: 100%;">
-                        <div class="col-lg-6" style="min-width: 50%;">
+                        <div class="col-lg-6 col-sm-6" style="min-width: 50%;">
 
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-sm-6">
                             <ul class="catSub">
                                 {% for no in n %}
                                 <li>{{no.nature}}</li>
@@ -441,7 +438,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <h1 style="text-align: center;">A Propos</h1>
-                        <p style="font-size: 20px; font-weight: bold; text-align: center;">TrocBi est un site de
+                        <p style="font-size: 20px; text-align: center;">TrocBi est un site de
                             e-commerce qui vous permettra de troquer vos objets en toute facilité avec une interface
                             simple accessible pour toutes les couches de la population , profitez juste …</p>
                     </div>
@@ -468,19 +465,23 @@
                     </div>
                     <br>
                     <br>
-                    <p class="textnews">
+                    <p class="textnews" id="newstext">
                         Veuillez entrer votre email afin de souscrire à notre newsletter
                     </p>
-                    <form action="">
-                        <div style="display: flex;"><input type="text" name="" id=""
-                                style="width: 80%; border-top-right-radius: 0px; border-bottom-right-radius: 0px; background-color: rgba(255,255,255,.16); border: 1px #000 solid;"
+                    <form action="/#newstext" method="POST">
+                        {% csrf_token %}
+                        <div style="display: flex;"><input type="text" name="news" id="news"
+                                style="width: 80%; border-top-right-radius: 0px; border-bottom-right-radius: 0px; background-color: rgba(255,255,255,.16); border: 1px #000 solid; color: #FFF;"
                                 class="form-control"><button type="submit"
                                 style="width: 20%; border-top-left-radius: 0px; border-bottom-left-radius: 0px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border: #000 solid 1px;"
                                 value="" class="btn-big btn-third"><i class="material-icons">send</i></button></div>
                     </form>
-                    <p class="textsuccess"><span>&#10004;</span>Votre email a été sauvegardé avec succès , Merci et à
-                        très
-                        bientôt</p>
+                    {% if nss == 'good' %}
+                    <p class="textsuccess"><span>&#10004;</span>Votre email a été sauvegardé avec succès , Merci et à très bientôt</p>
+                    {% elif nss == 'bad' %}
+                    <p class="textsuccess"><span>&#10060;</span>Une erreur est survenue veuillez réessayer!!!</p>
+                    {% else%}
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -572,7 +573,7 @@
         const user_input = $("#searched")
         //const search_icon = $('#search-icon')
         const artists_div = $('#replaceable-content')
-        const endpoint = '/'
+        const endpoint = '/search/'
         const delay_by_in_ms = 700
         let scheduled_function = false
 

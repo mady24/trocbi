@@ -310,12 +310,14 @@ def loginprocess(request):
     username = request.POST['logID']
     password = request.POST['passwd']
     user = authenticate(request, username=username, password=password)
-    if user is not None:
-        print(user)
-        login(request, user)
-        return HttpResponseRedirect(reverse('index'))
-    else:
-        return HttpResponseRedirect(reverse('login'))
+    try:
+        if user is not None:
+            print(user)
+            login(request, user)
+            return HttpResponseRedirect(reverse('index'))
+    except:
+        error = True
+        return HttpResponseRedirect(reverse('login', {error}))
 
 def logout_view(request):
     logout(request)

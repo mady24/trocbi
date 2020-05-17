@@ -439,15 +439,19 @@ small{
  .cat{
     width: 80%;
     overflow: hidden;
+    /*min-height: 55vh;
+    max-height: 55vh;*/
     margin-left: 5%;
     padding-top: .8vh;
     background-color: #FFF;
     border: 0.1px solid rgba(112,112,112,0.16);
     border-bottom: #F2BB03 1px solid;
     box-shadow: 26px 34px 56px -30px rgba(0,0,0,0.40);
+    padding-left: 5%;
 }
 
 .catImg{
+    /*margin-left: 15% !important;*/
     background-color: rgba(250,48,62,.09);
     border-radius: 50%;
     margin-left: 5px;
@@ -487,12 +491,22 @@ small{
     
 }
 
+.sub{
+    display: block;
+}
+
 .catSub{
     list-style: none;
     text-decoration: none;
     text-align: left;
     right: 0;
     bottom: 0;
+    position: relative;
+    top: 0;
+}
+
+.catSubBtn{
+    
     position: relative;
 }
 
@@ -1665,8 +1679,12 @@ margin-top: 3%;
     .catTitle{
         hyphens: auto;
         font-size: 20px;
-        top: 5% !important;
-    left: 30% !important;
+        left: 40% !important;
+    }
+
+    .catSubBtn{
+        margin-top: 10%;
+        position: relative;
     }
 
     .titleRecent img{
@@ -1698,6 +1716,7 @@ margin-top: 3%;
     .catTitle{
         hyphens: auto;
         font-size: 13px;
+        left: 45% !important;
     }
 
     .titleRecents img{
@@ -1742,12 +1761,38 @@ margin-top: 3%;
         position: absolute;
     }
 
+    .catSubBtn{
+        margin-top: 30%;
+        position: relative;
+    }
+
     .carousel-item{
         height: 50vh;
     }
 
     .carousel-item .container h1{
         font-size: 15px;
+    }
+
+    .catTitle{
+        hyphens: auto;
+        font-size: 13px;
+        left: 50% !important;
+    }
+}
+
+@media screen and (max-width: 560px){
+    .catSubBtn{
+        margin-top: 50%;
+        position: relative;
+    }
+}
+
+@media screen and (max-width: 800px) and (min-width: 768px){
+    .catTitle{
+        hyphens: auto;
+        font-size: 13px;
+        left: 30% !important;
     }
 }
 

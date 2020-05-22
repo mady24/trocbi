@@ -810,7 +810,6 @@ small{
     background-color: #F2BD02;
     padding: 5px 10% 5px 10%;
     display: flex;
-    height: 10vh;
     background-image: url("img/logoreverse.png");
     background-repeat: no-repeat;
     background-position: 50%;
@@ -913,7 +912,7 @@ a:hover{
 }
 
 .details .detailF{
-    display: flex;
+    padding-top: 5%;
 }
 
 .details .detailF .detailIPR{
@@ -927,33 +926,34 @@ a:hover{
 }
 
 .imB{
-    width: 70%;
+    width: 60%;
     height: 30%;
 }
 
 .imB img{
-    height: 60vh;
-    width: 80%;
-    margin-left: 10%;
+    height: 400px;
+    width: 400px;
+    margin-left: 5%;
 }
 
 .imS{
+    margin-left: 0;
     width: 30%;
-    height: 30%
+    height: 400px
 }
 
 .imS .imST,.imSB{
-    height: 50%;
+    height: 200px;
 }
 .imS .imST img{
-    height: 45%;
+    height: 190px;
     width: 80%;
 }
 
 .imS .imSB img{
-    height: 45%;
+    height: 190px;
     margin-bottom: 0%;
-    margin-top: 5vh;
+    margin-top: 10px;
     width: 80%;
 }
 
@@ -992,28 +992,29 @@ margin-top: 3%;
     color: #FA303E;
 }
 
-.details .detailF .detailO{
-    height: 30vh;
+.detailO{
+    
     width: 15%;
     margin-left: 5%;
     background-color: rgba(214,214,214,0.20);
     box-shadow: 3px 2px rgba(0,0,0,0.05);
+    padding: 3%;
 }
 
-.details .detailF .detailO img{
+.detailO img{
     
-    width: 40%;
-    margin-top: 20%;
+    width: 80%;
+    margin-top: 0%;
 }
 
-.details .detailF .detailO .ownerN{
+.detailO .ownerN{
    text-align: center;
-   margin-top: 5%;
+   margin-top: 15%;
    font-weight: 300;
    margin-bottom: 25%;
 }
 
-.details .detailF .detailO a{
+.detailO a{
     align-self: center;
 
 }
@@ -1044,37 +1045,39 @@ margin-top: 3%;
     font-weight: 300;
 }
 
-.details .articles .articlesL{
+.articlesL{
     display: flex;
     overflow-x: scroll;
     overflow-y: visible;
     width: 100%;
 }
 
-.details .articles .articlesL .articlesLC{
+.articlesL .articlesLC{
     margin-top: 2vh;
-    min-width: 30%;
+    min-width: 100px;
+    max-height: 250px;
     margin-left: 5%;
     margin-right: 5%;
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.18);
 }
 
-.details .articles .articlesL .articlesLC:nth-child(1){
+.articlesL .articlesLC:nth-child(1){
     margin-left: 0%;
 }
 
-.details .articles .articlesL .articlesLC img{
-    width: 80%;
+.articlesL .articlesLC img{
+    min-width: 80%;
+    max-width: 80%;
     margin-left: 10%;
-    max-height: 90%;
+    max-height: 200px;
     margin-top: 5%;
 }
-
-.details .articles .articlesL .articlesLC h1{
-    width: 80%;
+.articlesL .articlesLC h1{
+    max-width: 80%;
     max-height: 5%;
     margin-left: 10%;
     font-weight: 300;
+    font-size: 20px;
     margin-top: 5%;
     color:#D98E04;
 }
@@ -1675,6 +1678,48 @@ margin-top: 3%;
 
 /*end animations*/
 
+.spacer{
+    min-height: 5%;
+    max-height: 5%;
+}
+
+.spacer1{
+    min-height: 5%;
+    max-height: 5%;
+}
+
+.but {
+    position: static;
+    bottom: 0%;
+    width: 90%;
+}
+
+.redBrosse{
+    text-align: center; 
+    border-radius: 
+    20px; 
+    background-color: #FA303E; 
+    width: 15%; 
+    right: 0% !important; 
+    left: inherit; 
+    float: right; 
+    color: #FFF; 
+    padding: 3px;
+}
+
+.yellowBrosse{
+    text-align: center; 
+    border-radius: 
+    20px; 
+    background-color: #F2BB03; 
+    width: 15%; 
+    right: 0% !important; 
+    left: inherit; 
+    float: right; 
+    color: #FFF; 
+    padding: 3px;
+}
+
 @media screen and (max-width: 1366px ){
     .catTitle{
         hyphens: auto;
@@ -1709,6 +1754,69 @@ margin-top: 3%;
      .carousel-item{
          height: 100vh;
      }
+
+     .imB{
+        width: 70%;
+        height: 30%;
+    }
+    
+    .imB img{
+        height: 400px;
+        width: 400px;
+        margin-left: 5%;
+    }
+    
+    .imS{
+        margin-left: 5%;
+        width: 400px;
+        height: 400px
+    }
+    
+    .imS .imST,.imSB{
+        height: 200px;
+    }
+    .imS .imST img{
+        height: 190px;
+        width: 90%;
+    }
+    
+    .imS .imSB img{
+        height: 190px;
+        margin-bottom: 0%;
+        margin-top: 10px;
+        width: 90%;
+    }
+
+    .detailO{
+        margin-left: 25%;
+        width: 50%;
+        /*margin-left: 5%;*/
+        background-color: rgba(214,214,214,0.20);
+        box-shadow: 3px 2px rgba(0,0,0,0.05);
+        padding: 3%;
+    }
+    
+    .detailO img{
+        
+        width: 30%;
+        margin-top: 0%;
+    }
+    
+    .detailO .ownerN{
+       text-align: center;
+       margin-top: 15%;
+       font-weight: 300;
+       margin-bottom: 15%;
+    }
+    
+    .detailO a{
+        align-self: center;
+    
+    }
+
+    .redBrosse, .yellowBrosse{
+        width: 40%;
+    }
 
 }
 
@@ -1788,21 +1896,78 @@ margin-top: 3%;
     }
 }
 
-@media screen and (max-width: 800px) and (min-width: 768px){
+@media screen and (max-width: 800px) and (min-height: 768px){
     .catTitle{
         hyphens: auto;
         font-size: 13px;
         left: 30% !important;
     }
+
+    .detailO{
+        margin-left: 25%;
+        width: 40%;
+        /*margin-left: 5%;*/
+        background-color: rgba(214,214,214,0.20);
+        box-shadow: 3px 2px rgba(0,0,0,0.05);
+        padding: 3%;
+    }
+    
+    .detailO img{
+        
+        width: 20%;
+        margin-top: 0%;
+    }
+    
+    .detailO .ownerN{
+       text-align: center;
+       margin-top: 10%;
+       font-weight: 150;
+       margin-bottom: 10%;
+    }
+    
+    .detailO a{
+        align-self: center;
+    
+    }
+
+    .but {
+        position: initial !important;
+        bottom: 0%;
+        width: 90%;
+    }
+
+    .footer{
+        display: block;
+    }
+}
+
+@media screen and (max-width: 768px) and (max-height: 1024px){
+    .detailO{
+        margin-left: 25%;
+        width: 50%;
+        /*margin-left: 5%;*/
+        background-color: rgba(214,214,214,0.20);
+        box-shadow: 3px 2px rgba(0,0,0,0.05);
+        padding: 3%;
+    }
+    
+    .detailO img{
+        
+        width: 30%;
+        margin-top: 0%;
+    }
+    
+    .detailO .ownerN{
+       text-align: center;
+       margin-top: 20%;
+       font-weight: 300;
+       margin-bottom: 20%;
+    }
+    
+    .detailO a{
+        align-self: center;
+    
+    }
 }
 
 
-.spacer{
-    min-height: 5%;
-    max-height: 5%;
-}
-
-.spacer1{
-    min-height: 5%;
-    max-height: 5%;
-}

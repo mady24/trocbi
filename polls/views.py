@@ -11,6 +11,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.core.paginator import Paginator
+from django.core.mail import send_mail
 
 from .models import PostProp
 from .models import SousFamille
@@ -214,6 +215,24 @@ def list(request):
     return HttpResponse(template.render(context, request))
 
 def detail(request, postProp_id):
+
+    if request.method == 'POST':
+        first = request.POST['first']
+        last = request.POST['last']
+        name = request.POST['name']
+        iden = request.POST['id']
+        valeur = request.POST['valeur']
+        prix = request.POST['prix']
+        comment = request.POST['comment']
+        mail = request.POST['mail']
+        send_mail(
+            f'Proposition de { first} { last  }',
+            f'Bonjour { request.user.first_name } { request.user.last_name} \n { first } { last  } vous a fait une proposition pour votre article {  name} portant la référence { iden } d\'une valeur de { valeur }. \n Sa proposition financiaire est de: { prix }. \n Son message est le suivant: \n { comment }. \n Merci et à très bientôt sur trocbi.sn ',
+            'thiape18@gmail.com',
+            [f'{ mail }'],
+            fail_silently=False,
+        )
+
     context = {}
     url_parameter = request.GET.get("q")
 

@@ -94,9 +94,9 @@
             <h6 class="catT">Catégories:&nbsp;&nbsp;&nbsp;&nbsp;</h6>
             <h6 class="catTs">{{posts.nature}}</h6>
         </div>
-        <div class="row detailF">
-            <div class="col-lg-9 detailIPR">
-                <div class=" row">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class=" row" style="width: 100%; box-shadow: 3px 2px rgba(0,0,0,0.10); border: 1px rgba(0,0,0,0.05) solid; padding: 5%; ">
                     <div class="col-lg-8 imB">
                         {% if posts.image1.url != null %}
                         <img src="{{posts.image1.url}}" alt="">
@@ -126,24 +126,27 @@
                         Détails :
                     </h1>
                     <div class="detailT">
-                        <h3 class="prix">
+                        <div style="display: flex;">
+                        <h3 class="prix" style="margin-right: 5%;">
                             Prix :
                         </h3>
-                        <h3 class="ref">
-                            Réf :
-                        </h3>
-                    </div>
-                    <div class="detailC">
                         <h5 class="prixD">
                             {{posts.prix_achat}} fcfa
                         </h5>
+                        </div>
+                        <div style="display: flex;">
+                        <h3 class="ref"  style="margin-right: 5%;">
+                            Réf :
+                        </h3>
                         <h5 class="refD">
                             {{posts.id}}
                         </h5>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
-            <div class="col-lg-2 detailO" align="center">
+            <div class="col-lg-2 detailO" align="center" style="height: 30vh; margin-left: 5%; background-color: rgba(214,214,214,0.20); box-shadow: 3px 2px rgba(0,0,0,0.05);">
                 {% if usr.avatar.avatar.url == '' %}
                 <img id="pp" src="{% static 'img/user.png' %}" alt="">
                 {% else %}
@@ -152,7 +155,7 @@
                 <h6 class="ownerN">
                     {{posts.user}}
                 </h6>
-                <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-sixth">Contacter</a>
+                <a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-sixth">Contacter</a>
             </div>
         </div>
         <div class="detailDescri">
@@ -165,7 +168,7 @@
         </div>
         <div class="articles">
             <div class="articlesT">
-                <h1>Artciles :</h1>
+                <h1>Articles :</h1>
             </div>
             <div class="articlesL row">
                 {% for oth in oth %}
@@ -176,7 +179,7 @@
                         {% else %}
                         <img src="{% static 'img/not-found.png' %}" alt="">
                         {% endif %}
-                        <h1>{{oth.name}}</h1>
+                        <a href="/{{oth.id}}/"><h1>{{oth.name}}</h1></a>
                     </div>
                 </div>
                 {% endfor %}
@@ -197,6 +200,42 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Contacter</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <input type="hidden" name="mail" value="{{ usr.email }}">
+                    <input type="hidden" name="first" value="{{ usr.first_name }}">
+                    <input type="hidden" name="last" value="{{ usr.last_name }}">
+                    <input type="hidden" name="id" value="{{ posts.id }}">
+                    <input type="hidden" name="valeur" value="{{ posts.prix_achat }}">
+                    <input type="hidden" name="name" value="{{ posts.name }}">
+                    <div class="form-group">
+                      <label for="prix">prix proposé</label>
+                      <input type="text" name="prix" id="prix" class="form-control" value="{{posts.prix_achat}}">
+                    </div>
+                    <div class="form-group">
+                      <label for="comment">Message</label>
+                      <textarea class="form-control" name="comment" id="comment" rows="3" required></textarea>
+                    </div>
+                  
+            </div>
+            <div class="modal-footer">
+              <button type="reset" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
+          </div>
+        </div>
+      </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="{% static 'bootstrap.bundle.min.js'%}"></script>
     <script src="{% static 'popper.min.js'%}"></script>

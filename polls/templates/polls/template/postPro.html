@@ -168,7 +168,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                        <label for="desc">Description</label>
+                        <label for="desc">Description Sommaire</label>
                         <textarea name="l_des" id="desc1" cols="30" rows="2" class="form-control"
                             maxlength="100"></textarea>
                         <span id="textarea_feedback1" class="under"></span><br><br>
@@ -176,7 +176,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                        <label for="desc">Description</label>
+                        <label for="desc">Description Détaillée</label>
                         <textarea name="desc" id="desc" cols="30" rows="10" class="form-control"
                             maxlength="4000"></textarea>
                         <span id="textarea_feedback" class="under"></span><br><br>
@@ -189,25 +189,31 @@
                         </span>
                     </div>
                 </div>
-                <div class="row" id="img1">
-                    <div class="col-lg-6">
+                <div class="row" id="img1" style="min-height: 50%;">
+                    <div class="col-lg-8">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="upload-btn-wrapper">
-                                    <input type="file" name="img1" id="file1" onchange="javascript:updateList()" />
-                                    <p id="wrapper1"></p>
+                                    <input type="file" name="img1" id="file1" onchange="updateList(this)" required style="max-width: 100px;"/>
+                                    <img src="" id="wrapper1">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="upload-btn-wrapper">
-                                    <input type="file" name="img2" id="file2" onchange="javascript:updateList1()" />
-                                    <p id="wrapper2"></p>
+                                    <input type="file" name="img2" id="file2" onchange="updateList1(this)" style="max-width: 100px;"/>
+                                    <img src="" id="wrapper2">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="upload-btn-wrapper">
-                                    <input type="file" name="img3" id="file3" onchange="javascript:updateList2()" />
-                                    <p id="wrapper3"></p>
+                                    <input type="file" name="img3" id="file3" onchange="updateList2(this)" style="max-width: 100px;"/>
+                                    <img src="" id="wrapper3">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="upload-btn-wrapper">
+                                    <input type="file" name="img4" id="file4" onchange="updateList3(this)" style="max-width: 100px;"/>
+                                    <img src="" id="wrapper4">
                                 </div>
                             </div>
                         </div>
@@ -298,46 +304,64 @@
             }
         }
 
-        updateList = function () {
-            var input = document.getElementById('file1');
-            var output = document.getElementById('wrapper1');
+        function updateList (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-            console.log(input.files);
+                reader.onload = function (e) {
+                    $('#wrapper1')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(150);
+                };
 
-
-            output.innerHTML = input.files.item(0).name;
-            /*for (var i = 0; i < input.files.length; ++i) {
-              output.innerHTML += '<li>' + input.files.item(i).name + '</li>';
+                reader.readAsDataURL(input.files[0]);
             }
-            output.innerHTML += '</ul>';*/
         }
 
-        updateList1 = function () {
-            var input = document.getElementById('file2');
-            var output = document.getElementById('wrapper2');
+        function updateList1 (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-            console.log(input.files);
+                reader.onload = function (e) {
+                    $('#wrapper2')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(150);
+                };
 
-
-            output.innerHTML = input.files.item(0).name;
-            /*for (var i = 0; i < input.files.length; ++i) {
-              output.innerHTML += '<li>' + input.files.item(i).name + '</li>';
+                reader.readAsDataURL(input.files[0]);
             }
-            output.innerHTML += '</ul>';*/
         }
 
-        updateList2 = function () {
-            var input = document.getElementById('file3');
-            var output = document.getElementById('wrapper3');
+        function updateList2 (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-            console.log(input.files);
+                reader.onload = function (e) {
+                    $('#wrapper3')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(150);
+                };
 
-
-            output.innerHTML = input.files.item(0).name;
-            /*for (var i = 0; i < input.files.length; ++i) {
-              output.innerHTML += '<li>' + input.files.item(i).name + '</li>';
+                reader.readAsDataURL(input.files[0]);
             }
-            output.innerHTML += '</ul>';*/
+        }
+
+        function updateList3 (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#wrapper4')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(150);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
         }
 
         $(document).ready(function () {

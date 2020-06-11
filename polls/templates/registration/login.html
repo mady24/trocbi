@@ -43,6 +43,9 @@
         </div>
         <div class="formLogin">
             <form action="/loginprocess" method="POST">
+                
+
+                {{error}}
                 {% csrf_token %}
                 <div>
                     <label for="logID">Login</label><br>
@@ -51,7 +54,11 @@
                 <div>
                     <label for="passwd">Mot de passe</label>
                     <input type="password" name="passwd" id="passwd" class="form-control">
-                    
+                    {% if error == 'yes' %}
+                    <div style="color: red; font-size: 12px;">
+                    Le nom d'utlisateur et/ou le mot de passe sont erronés.
+                    </div>
+                    {% endif %}
                     <small><a href="/password-reset">Mot de passe oublié</a></small>
                 </div>
                 <div class="align-content-xl-center" style="padding-left: 20%; padding-right: 20%; padding-top: 2%;" align="center">

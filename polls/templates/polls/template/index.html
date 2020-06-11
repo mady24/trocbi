@@ -42,11 +42,11 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <!--<li class="nav-item">
-                        <a class="nav-link scrolle btn btn-primary" {% if user.is_authenticated %} href="/passerannonce"
+                    <li class="nav-item">
+                        <a class="nav-link scrolle btn btn-third" {% if user.is_authenticated %} href="/passerannonce"
                             {% else %} href="/login" {% endif %}>Déposer une annonce</a>
                     </li>
-                    <li class="nav-item" style="border-right: #000 solid 1px;">
+                    <!--<li class="nav-item" style="border-right: #000 solid 1px;">
                         <a class="nav-link" href="#search"><i class="fa fa-search"
                                 style="font-size: 20px; font-weight:lighter;"></i></a>
                     </li>-->
@@ -101,8 +101,8 @@
                             Votre premier réseau collaboratif<br>de troc au <span>Sénégal</span>
                         </h1>
                         <div class="spacer1"></div>
-                        <p><a {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}
-                                class="btn btn-third">Déposer une annonce</a></p>
+                        <!--<p><a {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}
+                                class="btn btn-third">Déposer une annonce</a></p>-->
                     </div>
                 </div>
             </div>
@@ -114,16 +114,13 @@
                         <h1 class="slog">
                             Troquez , Economisez ,<span> Profitez</span>
                         </h1>
-                        <br>
-                        <br>
+                        <div class="spacer"></div>
                         <h1 class="descrip">
                             Votre premier réseau collaboratif<br>de troc au <span>Sénégal</span>
                         </h1>
-                        <br>
-                        <br>
-                        <br>
-                        <p><a {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}
-                                class="btn btn-third">Déposer une annonce</a></p>
+                        <div class="spacer1"></div>
+                        <!--<p><a {% if user.is_authenticated %} href="/passerannonce" {% else %} href="/login" {% endif %}
+                                class="btn btn-third">Déposer une annonce</a></p>-->
                     </div>
                 </div>
             </div>
@@ -338,9 +335,9 @@
                         {{prop.user.profile.address}}
                     </h6>
                 </div>
-                <h1 class="Price">
+                <!--<h1 class="Price">
                     {{ prop.prix_achat}}
-                </h1>
+                </h1>-->
                 <h6 class="owner">
                     {{prop.user}}
                 </h6>
@@ -372,7 +369,7 @@
     <div class="titleRecents">
 
         <div class="headings">
-            <h1>Les meilleurs ventes</h1>
+            <h1>Les meilleurs Deals</h1>
         </div>
         <img src="{% static 'img/handshake.png' %}" alt="">
     </div>

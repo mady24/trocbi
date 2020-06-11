@@ -57,9 +57,11 @@ class PostProp(models.Model):
     typeProp = models.CharField(max_length = 200, choices=TYPE)
     pub_date = models.DateTimeField(timezone.now())
     image1 = models.ImageField(blank=True, null=True)
-    image2 = models.ImageField(blank=True, null=True)
-    image3 = models.ImageField(blank=True, null=True)
+    image2 = models.ImageField(blank=True, null=True, default='not-found.png')
+    image3 = models.ImageField(blank=True, null=True, default='not-found.png')
+    image4 = models.ImageField(blank=True, null=True, default='not-found.png')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    validated = models.BooleanField(default=False)
     def __str__(self):
         return '%d'%(self.id)
 
@@ -72,6 +74,30 @@ class PostProp(models.Model):
                 output_size = (1500,1500)
                 img.thumbnail(output_size)
                 img.save(self.image1.path, dpi=(150,150))
+        
+        if self.image2.path != '':
+            img = Image.open(self.image2.path)
+
+            if img.height < 1500 or img.width < 1500:
+                output_size = (1500,1500)
+                img.thumbnail(output_size)
+                img.save(self.image2.path, dpi=(150,150))
+
+        if self.image3.path != '':
+            img = Image.open(self.image3.path)
+
+            if img.height < 1500 or img.width < 1500:
+                output_size = (1500,1500)
+                img.thumbnail(output_size)
+                img.save(self.image3.path, dpi=(150,150))
+        
+        if self.image4.path != '':
+            img = Image.open(self.image4.path)
+
+            if img.height < 1500 or img.width < 1500:
+                output_size = (1500,1500)
+                img.thumbnail(output_size)
+                img.save(self.image4.path, dpi=(150,150))
 
 class PostSearch(models.Model):
     name = models.CharField(max_length=200)

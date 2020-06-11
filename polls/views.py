@@ -93,7 +93,7 @@ def index(request):
     
     print(p2)
     template = loader.get_template('polls/template/index.html')
-    prop = PostProp.objects.order_by("-pub_date")[:3]
+    prop = PostProp.objects.order_by("-pub_date").filter(validated=True)[:3]
     zip1 = zip(sf,p)
     zip2 = zip(sf1,p1)
     zip3 = zip(sf2,p2)
@@ -300,43 +300,177 @@ def passerAjouter(request):
         da = request.POST['da']
         ea = request.POST['ea']
         img1 = request.FILES['img1']
-        img2 = request.FILES['img2']
-        img3 = request.FILES['img3']
+        if bool(request.FILES.get('img2', False)) == True:
+            img2 = img2 = request.FILES['img2']
+        else:
+            img2 = ''
+        if bool(request.FILES.get('img3', False)) == True:
+            img3 = request.FILES['img3']
+        else:
+            img3 = ''
+        if bool(request.FILES.get('img4', False)) == True:
+            img4 = request.FILES['img4']
+        else:
+            img4 = ''
 
-        propIns = PostProp(
-            name=name,
-            nature=NatureBien.objects.get(pk=nn),
-            typeProp=typeA,
-            l_descrip=l_des,
-            durée_util=du,
-            etat_achat=ea,
-            etat_actuel=eac,
-            prix_achat=prix,
-            description=desc,
-            pub_date=timezone.now(),
-            image1=img1,
-            image2=img2,
-            image3=img3,
-            user = request.user
-        )
+        if(img2 == '' and img3 == '' and img4 == ''):
+
+            propIns = PostProp(
+                name=name,
+                nature=NatureBien.objects.get(pk=nn),
+                typeProp=typeA,
+                l_descrip=l_des,
+                durée_util=du,
+                etat_achat=ea,
+                etat_actuel=eac,
+                prix_achat=prix,
+                description=desc,
+                pub_date=timezone.now(),
+                image1=img1,
+                user = request.user
+            )
+        elif(img2 != '' & img3 == '' & img4 == ''):
+
+            propIns = PostProp(
+                name=name,
+                nature=NatureBien.objects.get(pk=nn),
+                typeProp=typeA,
+                l_descrip=l_des,
+                durée_util=du,
+                etat_achat=ea,
+                etat_actuel=eac,
+                prix_achat=prix,
+                description=desc,
+                pub_date=timezone.now(),
+                image1=img1,
+                image2=img2,
+                user = request.user
+            )
+        elif(img2 != '' & img3 != '' & img4 == ''):
+
+            propIns = PostProp(
+                name=name,
+                nature=NatureBien.objects.get(pk=nn),
+                typeProp=typeA,
+                l_descrip=l_des,
+                durée_util=du,
+                etat_achat=ea,
+                etat_actuel=eac,
+                prix_achat=prix,
+                description=desc,
+                pub_date=timezone.now(),
+                image1=img1,
+                image2=img2,
+                image3=img3,
+                user = request.user
+            )
+        elif(img2 != '' & img3 == '' & img4 != ''):
+
+            propIns = PostProp(
+                name=name,
+                nature=NatureBien.objects.get(pk=nn),
+                typeProp=typeA,
+                l_descrip=l_des,
+                durée_util=du,
+                etat_achat=ea,
+                etat_actuel=eac,
+                prix_achat=prix,
+                description=desc,
+                pub_date=timezone.now(),
+                image1=img1,
+                image2=img2,
+                image4=img4,
+                user = request.user
+            )
+        elif(img2 == '' & img3 != '' & img4 == ''):
+
+            propIns = PostProp(
+                name=name,
+                nature=NatureBien.objects.get(pk=nn),
+                typeProp=typeA,
+                l_descrip=l_des,
+                durée_util=du,
+                etat_achat=ea,
+                etat_actuel=eac,
+                prix_achat=prix,
+                description=desc,
+                pub_date=timezone.now(),
+                image1=img1,
+                image3=img3,
+                user = request.user
+            )
+        elif(img2 != '' & img3 != '' & img4 == ''):
+
+            propIns = PostProp(
+                name=name,
+                nature=NatureBien.objects.get(pk=nn),
+                typeProp=typeA,
+                l_descrip=l_des,
+                durée_util=du,
+                etat_achat=ea,
+                etat_actuel=eac,
+                prix_achat=prix,
+                description=desc,
+                pub_date=timezone.now(),
+                image1=img1,
+                image2=img2,
+                image3=img3,
+                user = request.user
+            )
+        elif(img2 == '' & img3 != '' & img4 != ''):
+
+            propIns = PostProp(
+                name=name,
+                nature=NatureBien.objects.get(pk=nn),
+                typeProp=typeA,
+                l_descrip=l_des,
+                durée_util=du,
+                etat_achat=ea,
+                etat_actuel=eac,
+                prix_achat=prix,
+                description=desc,
+                pub_date=timezone.now(),
+                image1=img1,
+                image2=img3,
+                image4=img4,
+                user = request.user
+            )
+        elif(img2 == '' and img3 == '' and img4 != ''):
+
+            propIns = PostProp(
+                name=name,
+                nature=NatureBien.objects.get(pk=nn),
+                typeProp=typeA,
+                l_descrip=l_des,
+                durée_util=du,
+                etat_achat=ea,
+                etat_actuel=eac,
+                prix_achat=prix,
+                description=desc,
+                pub_date=timezone.now(),
+                image1=img1,
+                image4=img4,
+                user = request.user
+            )
         propIns.saveDemande()
     return HttpResponseRedirect(reverse('index'))
 
 def loginform(request):
-    return render(request, 'registration/login.html')
+    error = 'no'
+    return render(request, 'registration/login.html', {'error': error})
 
 def loginprocess(request):
     username = request.POST['logID']
     password = request.POST['passwd']
     user = authenticate(request, username=username, password=password)
-    try:
-        if user is not None:
-            print(user)
-            login(request, user)
-            return HttpResponseRedirect(reverse('index'))
-    except:
-        error = True
-        return HttpResponseRedirect(reverse('login', {error}))
+    if user is not None:
+        print(user)
+        login(request, user)
+        return HttpResponseRedirect(reverse('index'))
+    else:
+        error = 'yes'
+    return render(request, 'registration/login.html', {'error': error})
+        
 
 def logout_view(request):
     logout(request)
